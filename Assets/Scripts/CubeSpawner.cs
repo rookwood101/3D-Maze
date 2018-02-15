@@ -14,6 +14,6 @@ public class CubeSpawner : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Instantiate (cube);
+		Instantiate (cube); //You're re-instantiating the cube every update?
 	}
 }

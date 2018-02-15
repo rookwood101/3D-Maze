@@ -14,7 +14,7 @@ public class MazeArranger : MonoBehaviour {
 	[SerializeField]
 	private GameObject mazeParent;
 
-	// The highest x/y/z position any wall block can be in.
+	// The absolute value of the biggest/smallest x/y/z position any wall block can be in.
 	// Equal to the big centre cube's width/2 + 0.5.
 	// Currently the cube is width 8, allowing 10x10 walls. 
 	private float mazeMax = 4.5f;
@@ -23,16 +23,16 @@ public class MazeArranger : MonoBehaviour {
 	// TODO: procedural generation of mazes.
 	// TODO: consider using a larger maze.
 	private int[][] aMaze = new int[][] {
-		new int[] {1, 0, 1, 0, 1, 0, 1, 0, 1, 1},
-		new int[] {1, 0, 1, 0, 1, 0, 1, 0, 1, 1},
-		new int[] {1, 0, 0, 0, 0, 1, 1, 0, 0, 1},
-		new int[] {1, 0, 1, 0, 1, 0, 1, 0, 1, 1},
-		new int[] {1, 0, 1, 0, 1, 0, 1, 0, 1, 1},
-		new int[] {1, 0, 0, 0, 0, 1, 1, 0, 0, 1},
-		new int[] {1, 0, 1, 0, 1, 0, 1, 0, 1, 1},
-		new int[] {1, 0, 1, 0, 1, 0, 1, 0, 1, 1},
-		new int[] {1, 0, 0, 0, 0, 1, 1, 0, 0, 1},
-		new int[] {1, 0, 1, 0, 1, 0, 1, 0, 1, 1},
+		new int[] {1, 1, 1, 1, 0, 0, 1, 1, 1, 1},
+		new int[] {1, 0, 1, 0, 0, 0, 0, 0, 0, 1},
+		new int[] {1, 0, 1, 1, 0, 1, 0, 1, 1, 1},
+		new int[] {1, 0, 0, 0, 0, 1, 1, 1, 0, 1},
+		new int[] {0, 1, 0, 1, 1, 1, 0, 0, 0, 0},
+		new int[] {0, 1, 0, 0, 0, 1, 1, 1, 0, 0},
+		new int[] {1, 1, 1, 1, 0, 0, 0, 1, 0, 1},
+		new int[] {1, 0, 0, 1, 0, 1, 0, 1, 0, 1},
+		new int[] {1, 0, 0, 0, 0, 1, 0, 0, 0, 1},
+		new int[] {1, 1, 1, 1, 0, 0, 1, 1, 1, 1},
 	};
 
 	// At the start, generate a maze for each face.
@@ -62,7 +62,8 @@ public class MazeArranger : MonoBehaviour {
 		// The direction '→' in the diagram above.
 		Vector3 nextRowDirection = Vector3.zero;
 
-		int[][] maze = GetMazeForFace (face);
+
+        int[][] maze = GetMazeForFace (face);
 
 		// Where in world space should the first column, first row wall be placed.
 		// What direction in world space should the next column and next row be.
