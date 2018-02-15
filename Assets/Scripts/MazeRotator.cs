@@ -19,20 +19,22 @@ public class MazeRotator : MonoBehaviour {
         if (Input.GetMouseButton(0)) {
             cursorDelta = new Vector3 (newMouseX-oldMouseX, newMouseY - oldMouseY, 0.0f);
 
-            //gets rotation axis from Cross of mouseDelta Vector and Camera vision direction angle
+            /*
+            mouseDelta.x -= transform.eulerAngles.x;
+            mouseDelta.y -= transform.eulerAngles.y;
+            mouseDelta.z -= transform.eulerAngles.z;
+            Vector3 adjustedCross = Vector3.Cross(mouseDelta, intoCube);
+            */
+            //gets rotation axis from Cross of mouseDelta Vector and Camera vision direction vector
             Vector3 intoCube = new Vector3(0, 0, 1);
-
-            //mouseDelta.x -= transform.eulerAngles.x;
-            //mouseDelta.y -= transform.eulerAngles.y;
-            //mouseDelta.z -= transform.eulerAngles.z;
-            //Vector3 adjustedCross = Vector3.Cross(mouseDelta, intoCube);
             Quaternion rotate = Quaternion.AngleAxis(1, Vector3.Cross(cursorDelta, intoCube)); //- Quaternion.identity;
 
+            //gets rotation vector for maze
             rotaAxisX = rotate.eulerAngles.x;
             rotaAxisY = rotate.eulerAngles.y;
             rotaAxisZ = rotate.eulerAngles.z;
             Vector3 rotationAxis = new Vector3(rotaAxisX, rotaAxisY, rotaAxisZ);
-            transform.Rotate(rotationAxis);
+            transform.Rotate(rotationAxis); //rotate
         } else {
             relativeAxisX = transform.eulerAngles.x;
             relativeAxisY = transform.eulerAngles.y;
