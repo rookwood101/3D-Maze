@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 65354101174523508}
   - component: {fileID: 23923291234047758}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Maze Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
