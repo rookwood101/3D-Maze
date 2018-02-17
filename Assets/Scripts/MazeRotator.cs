@@ -14,6 +14,11 @@ public class MazeRotator : MonoBehaviour {
         transform.Rotate(Vector3.right, rotY);
     }*/
 
+	[SerializeField]
+	private GameObject cameraRotator;
+	[SerializeField]
+	private GameObject camera;
+
     private float oldMouseX, oldMouseY, newMouseX, newMouseY;
     private Vector3 cursorDelta, intoCube;
     private float rotaAxisX, rotaAxisY, rotaAxisZ; //Axis of Quaternion rotation
@@ -38,10 +43,10 @@ public class MazeRotator : MonoBehaviour {
             //gets rotation axis from Cross of mouseDelta Vector and Camera vision direction vector
             cursorDelta = new Vector3(newMouseX - oldMouseX, newMouseY - oldMouseY, 0.0f);
 
-            intoCube = new Vector3(0, 0, 1);//transform.forward;
-            transform.rotation *= Quaternion.AngleAxis(1, Vector3.Cross(cursorDelta, intoCube));
+//			intoCube = new Vector3(0, 0, 1);//transform.forward;
+//          transform.rotation *= Quaternion.AngleAxis(1, Vector3.Cross(cursorDelta, intoCube));
 
-            intoCube = new Vector3(0, 0, 1);
+			intoCube = cameraRotator.transform.position - camera.transform.position;
 			transform.rotation = Quaternion.AngleAxis(1, Vector3.Cross(cursorDelta, intoCube)) * transform.rotation;
 
             /*
