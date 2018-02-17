@@ -15,9 +15,10 @@ public class MazeArranger : MonoBehaviour {
 	private GameObject mazeParent;
 
 	// The absolute value of the biggest/smallest x/y/z position any wall block can be in.
-	// Equal to the big centre cube's width/2 + 0.5.
+	// Equal to the big centre cube's width/2 + maze wall's width / 2.
 	// Currently the cube is width 8, allowing 10x10 walls. 
-	private float mazeMax = 4.5f;
+	private float mazeMax = 0.16875f;
+	private float mazeWallWidth = 0.0375f;
 
 	// A made up maze.
 	// TODO: procedural generation of mazes.
@@ -115,7 +116,7 @@ public class MazeArranger : MonoBehaviour {
 				if (maze [row] [column] == 1) {
 					// If there should be a cube,
 					// place it in the correct location as a child of the maze parent
-					Instantiate (mazeWall, start + (column * nextColumnDirection) + (row * nextRowDirection), mazeWall.transform.rotation, mazeParent.transform);
+					Instantiate (mazeWall, start + (column * mazeWallWidth * nextColumnDirection) + (row * mazeWallWidth * nextRowDirection), mazeWall.transform.rotation, mazeParent.transform);
 				}
 			}
 		}
