@@ -9,7 +9,7 @@ public class CameraRotator : MonoBehaviour {
 	[SerializeField]
 	private GameObject cameraRotator;
 	[SerializeField]
-	private GameObject camera;
+	private GameObject mainCamera;
 
     private bool camPosSaved = false;
     private Quaternion savedCamPos;
@@ -18,7 +18,7 @@ public class CameraRotator : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        //savedCamPos = camera.transform.rotation;
+        //savedCamPos = mainCamera.transform.rotation;
 	}
 	
 	// Update is called once per frame
@@ -30,16 +30,16 @@ public class CameraRotator : MonoBehaviour {
         if (Input.GetMouseButton(0))
         {
             if (camPosSaved == false) {
-                //savedCamPos = camera.transform.rotation;
+                //savedCamPos = mainCamera.transform.rotation;
                 camPosSaved = true;
             }
             //gets rotation axis from Cross of mouseDelta Vector and Camera vision direction vector
             cursorDelta = new Vector3(newMouseX - oldMouseX, newMouseY - oldMouseY, 0.0f);
 
-            intoCube = cameraRotator.transform.position - camera.transform.position;
+            intoCube = cameraRotator.transform.position - mainCamera.transform.position;
             transform.rotation *= Quaternion.AngleAxis(rotationSpeed * Time.deltaTime, Vector3.Cross(cursorDelta, intoCube));
         } else {
-            //camera.transform.rotation = savedCamPos;
+            //mainCamera.transform.rotation = savedCamPos;
             camPosSaved = false;
         }
         oldMouseX = newMouseX;

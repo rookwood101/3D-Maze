@@ -976,7 +976,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 100
   cameraRotator: {fileID: 588903323}
-  camera: {fileID: 588903323}
+  mainCamera: {fileID: 0}
 --- !u!1 &1620254616
 GameObject:
   m_ObjectHideFlags: 0
@@ -1037,6 +1037,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 50
   slerpSpeed: 10
+  maxTilt: 5
   isTop: 0
   isBot: 0
   isRight: 0

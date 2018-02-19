@@ -8,51 +8,37 @@ public class MazeRotator : MonoBehaviour {
     int rotationSpeed;
 	[SerializeField]
 	int slerpSpeed;
+	[SerializeField]
+	int maxTilt;
 
-    private bool rotating = false;
-    private IEnumerator coroutine;
-    public bool isTop, isBot, isRight, isLeft, isFront, isBack;
+//    private bool rotating = false;
+//    private IEnumerator coroutine;
+//    public bool isTop, isBot, isRight, isLeft, isFront, isBack;
     
     void Update() {
         //TODO make cube rotate depending on which side the ball is on
         //if (Quaternion.LookRotation )
 
         //TODO make cube tilt correctly, at this point only W and A work
-        if (Input.GetKey(KeyCode.W) && (transform.eulerAngles.x % 90) < 15)
-        {
-            transform.rotation *= Quaternion.Euler(rotationSpeed * Time.deltaTime, 0, 0);
-        }
-        else if (Input.GetKey(KeyCode.S) && (transform.eulerAngles.x % 90) < 15)
-        {
-            transform.rotation *= Quaternion.Euler(-rotationSpeed * Time.deltaTime, 0, 0);
-        }
-        else if ((transform.eulerAngles.x % 90) > 0) {
-            //TODO rotate gradually back to x = 0
-        }
+		float verticalTilt = Input.GetAxis("Vertical")*maxTilt;
+		float horizontalTilt = -Input.GetAxis ("Horizontal")*maxTilt;
+		float otherticalTilt = Input.GetAxis ("Othertical") * maxTilt;
 
-        if (Input.GetKey(KeyCode.A) && (transform.eulerAngles.z % 90) < 15) {
-            transform.rotation *= Quaternion.Euler(0, 0, rotationSpeed * Time.deltaTime);
-        }
-        else if (Input.GetKey(KeyCode.D) && (transform.eulerAngles.z % 90) < 15) {
-            transform.rotation *= Quaternion.Euler(0, 0, -rotationSpeed * Time.deltaTime);
-        }
-        else if ((transform.eulerAngles.x % 90) > 0) {
-            //TODO rotate gradually back to z = 0
-			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.identity, Time.deltaTime * slerpSpeed);
-        }
+		transform.localRotation = Quaternion.Slerp (transform.localRotation, Quaternion.Euler (verticalTilt, otherticalTilt, horizontalTilt), slerpSpeed * Time.deltaTime);
+
 
         //makes cube rotate 90°, but also moves ball, so either find a way to make
         //this work in CameraRotator or freeze ball physics while rotating == true
-        if (Input.GetKeyDown(KeyCode.Q) && !rotating)
-        {
-            coroutine = WaitForSeconds(0.01f, 1);
-            StartCoroutine(coroutine);
-        }
-        if (Input.GetKeyDown(KeyCode.E) && !rotating)
-        {
-            coroutine = WaitForSeconds(0.01f, -1);
-            StartCoroutine(coroutine);
-        }
+//        if (Input.GetKeyDown(KeyCode.Q) && !rotating)
+//        {
+//            coroutine = WaitForSeconds(0.01f, 1);
+//            StartCoroutine(coroutine);
+//        }
+//        if (Input.GetKeyDown(KeyCode.E) && !rotating)
+//        {
+//            coroutine = WaitForSeconds(0.01f, -1);
+//            StartCoroutine(coroutine);
+//        }
 
         /*
         //gets the position differential of the cursor between frames to calculate rotation of maze
@@ -72,12 +58,12 @@ public class MazeRotator : MonoBehaviour {
         */
     }
 
-    private IEnumerator WaitForSeconds(float delay, int direction) {
-        rotating = true;
-        for (int i = 0; i < 45; i++) {
-            yield return new WaitForSeconds(delay);
-            transform.rotation *= Quaternion.AngleAxis(direction * 2, new Vector3(0, 1, 0));
-        }
-        rotating = false;
-    }
+//    private IEnumerator WaitForSeconds(float delay, int direction) {
+//        rotating = true;
+//        for (int i = 0; i < 45; i++) {
+//            yield return new WaitForSeconds(delay);
+//            transform.rotation *= Quaternion.AngleAxis(direction * 2, new Vector3(0, 1, 0));
+//        }
+//        rotating = false;
+//    }
 }
