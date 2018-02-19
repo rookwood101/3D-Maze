@@ -6,6 +6,8 @@ public class MazeRotator : MonoBehaviour {
 
     [SerializeField]
     int rotationSpeed;
+	[SerializeField]
+	int slerpSpeed;
 
     private bool rotating = false;
     private IEnumerator coroutine;
@@ -36,6 +38,7 @@ public class MazeRotator : MonoBehaviour {
         }
         else if ((transform.eulerAngles.x % 90) > 0) {
             //TODO rotate gradually back to z = 0
+			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.identity, Time.deltaTime * slerpSpeed);
         }
 
         //makes cube rotate 90°, but also moves ball, so either find a way to make
