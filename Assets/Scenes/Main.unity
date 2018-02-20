@@ -962,7 +962,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c9124ba0492941da8361fc04cb810c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 100
+  rotationSpeed: 10
   cameraRotator: {fileID: 1615843358}
   mainCamera: {fileID: 588903323}
 --- !u!1 &1620254616
@@ -1023,7 +1023,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 50
-  slerpSpeed: 10
+  slerpSpeed: 20
   maxTilt: 5
 --- !u!1 &1646380626
 GameObject:

@@ -30,38 +30,16 @@ public class CameraRotator : MonoBehaviour {
         if (Input.GetMouseButton(0))
         {
             if (camPosSaved == false) {
-                //savedCamPos = mainCamera.transform.rotation;
                 camPosSaved = true;
             }
-            //gets rotation axis from Cross of mouseDelta Vector and Camera vision direction vector
-            cursorDelta = new Vector3(newMouseX - oldMouseX, newMouseY - oldMouseY, 0.0f);
 
-            intoCube = cameraRotator.transform.position - mainCamera.transform.position;
-            transform.rotation *= Quaternion.AngleAxis(rotationSpeed * Time.deltaTime, Vector3.Cross(cursorDelta, intoCube));
-        } else {
-            //mainCamera.transform.rotation = savedCamPos;
+			transform.rotation = transform.rotation * Quaternion.Euler (Time.deltaTime * rotationSpeed * -(newMouseY - oldMouseY), 0, 0);
+			transform.rotation = Quaternion.Euler (0, Time.deltaTime * rotationSpeed * (newMouseX - oldMouseX), 0) * transform.rotation;
+		} else {
             camPosSaved = false;
         }
         oldMouseX = newMouseX;
         oldMouseY = newMouseY;
-
-        /*
-        if (Input.GetKey(KeyCode.UpArrow)) {
-			transform.rotation = transform.rotation * Quaternion.Euler (rotationSpeed * Time.deltaTime, 0, 0);
-		}
-		if (Input.GetKey(KeyCode.DownArrow)) {
-			transform.rotation = transform.rotation * Quaternion.Euler (-rotationSpeed * Time.deltaTime, 0, 0);
-		}
-		if (Input.GetKey(KeyCode.RightArrow)) {
-			transform.rotation = Quaternion.Euler (0, -rotationSpeed * Time.deltaTime, 0) * transform.rotation;
-		}
-		if (Input.GetKey(KeyCode.LeftArrow)) {
-			transform.rotation = Quaternion.Euler (0, rotationSpeed * Time.deltaTime, 0) * transform.rotation;
-		}
-        if (Input.GetKey(KeyCode.Space)) {
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-        }
-        */
     }
 
 
