@@ -9,6 +9,9 @@ public class MazeArranger : MonoBehaviour {
 	// Maze wall prefab (currently a cube)
 	[SerializeField]
 	private GameObject mazeWall;
+	// Maze pickup prefab (currently a small sphere)
+	[SerializeField]
+	private GameObject mazePickup;
 
 	// The parent object that holds the entire maze cube.
 	[SerializeField]
@@ -24,12 +27,12 @@ public class MazeArranger : MonoBehaviour {
 	// TODO: consider using a larger maze.
 	private int[][] aMaze = new int[][] {
 		new int[] {1, 1, 1, 1, 0, 0, 1, 1, 1, 1},
-		new int[] {1, 0, 1, 0, 0, 0, 0, 0, 0, 1},
+		new int[] {1, 0, 1, 0, 0, 0, 0, 2, 0, 1},
 		new int[] {1, 0, 1, 1, 0, 1, 0, 1, 1, 1},
 		new int[] {1, 0, 0, 0, 0, 1, 1, 1, 0, 1},
 		new int[] {0, 1, 0, 1, 1, 1, 0, 0, 0, 0},
-		new int[] {0, 0, 0, 0, 0, 1, 1, 1, 0, 0},
-		new int[] {1, 1, 1, 1, 0, 0, 0, 1, 0, 1},
+		new int[] {0, 0, 2, 0, 0, 1, 1, 1, 0, 0},
+		new int[] {1, 1, 1, 1, 0, 0, 2, 1, 0, 1},
 		new int[] {1, 0, 0, 1, 0, 1, 0, 1, 0, 1},
 		new int[] {1, 0, 0, 0, 0, 1, 0, 0, 0, 1},
 		new int[] {1, 1, 1, 1, 0, 0, 1, 1, 1, 1},
@@ -116,6 +119,9 @@ public class MazeArranger : MonoBehaviour {
 					// If there should be a cube,
 					// place it in the correct location as a child of the maze parent
 					Instantiate (mazeWall, start + (column * nextColumnDirection) + (row * nextRowDirection), mazeWall.transform.rotation, mazeParent.transform);
+				} else if (maze [row] [column] == 2) {
+					// If there should be a pickup, same as above
+					Instantiate (mazePickup, start + (column * nextColumnDirection) + (row * nextRowDirection), mazeWall.transform.rotation, mazeParent.transform);
 				}
 			}
 		}
