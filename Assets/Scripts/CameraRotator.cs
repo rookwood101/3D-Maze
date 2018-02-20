@@ -10,6 +10,8 @@ public class CameraRotator : MonoBehaviour {
 	private GameObject cameraRotator;
 	[SerializeField]
 	private GameObject mainCamera;
+	[SerializeField]
+	private int slerpSpeed;
 
     private bool camPosSaved = false;
     private Quaternion savedCamPos;
@@ -24,6 +26,9 @@ public class CameraRotator : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+		//axis for rotation of view direction
+		float otherticalTilt = Input.GetAxis ("Othertical");
+
         //gets the position differential of the cursor between frames to calculate rotation of maze
         newMouseX = Input.mousePosition.x;
         newMouseY = Input.mousePosition.y;
@@ -37,6 +42,7 @@ public class CameraRotator : MonoBehaviour {
 			transform.rotation = Quaternion.Euler (0, Time.deltaTime * rotationSpeed * (newMouseX - oldMouseX), 0) * transform.rotation;
 		} else {
             camPosSaved = false;
+			transform.localRotation = Quaternion.Slerp (transform.localRotation, Quaternion.Euler (60, 0, 0), slerpSpeed * Time.deltaTime);
         }
         oldMouseX = newMouseX;
         oldMouseY = newMouseY;
