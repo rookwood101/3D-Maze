@@ -23,7 +23,8 @@ public class MazeRotator : MonoBehaviour {
 		float verticalTilt = Input.GetAxis("Vertical")*maxTilt;
 		float horizontalTilt = -Input.GetAxis ("Horizontal")*maxTilt;
 
-		transform.localRotation = Quaternion.Slerp (transform.localRotation, Quaternion.Euler (verticalTilt, 0, horizontalTilt) * currentFaceDirection, slerpSpeed * Time.deltaTime);
+		transform.localRotation = Quaternion.Slerp (transform.localRotation, currentFaceDirection, slerpSpeed * Time.deltaTime);
+		transform.parent.localRotation = Quaternion.Slerp (transform.parent.localRotation, Quaternion.Euler (verticalTilt, 0, horizontalTilt), slerpSpeed * Time.deltaTime);
 
 		Vector3[] dirVectors = {
 			transform.up, //up
@@ -50,11 +51,7 @@ public class MazeRotator : MonoBehaviour {
 	public void SetCurrentFace (GameObject face) {
 		currentFace = face;
 
-		if (face.CompareTag ("Top")) {
-			currentFaceDirection = Quaternion.Euler (0, 0, 0) * currentFaceDirection;
-		} else if (face.CompareTag ("Bottom")) {
-			currentFaceDirection = Quaternion.Euler (0, 0, 180) * currentFaceDirection;
-		} else if (face.CompareTag ("Right")) {
+		if (face.CompareTag ("Right")) {
 			currentFaceDirection = Quaternion.Euler (0, 0, 90) * currentFaceDirection;
 		} else if (face.CompareTag ("Left")) {
 			currentFaceDirection = Quaternion.Euler (0, 0, -90) * currentFaceDirection;
