@@ -4,34 +4,41 @@ using UnityEngine;
 
 public class MazeRotator : MonoBehaviour {
 
+    [SerializeField]
+    int rotationSpeed;
 	[SerializeField]
-    int rotationSpeed = 100;
+	int slerpSpeed;
 	[SerializeField]
-	private GameObject cameraRotator;
-	[SerializeField]
-	private GameObject camera;
+	int maxTilt;
+    
+    void Update() {
+        //TODO make cube rotate depending on which side the ball is on
 
-    private float oldMouseX, oldMouseY, newMouseX, newMouseY;
-    private Vector3 cursorDelta, intoCube;
-    private float rotaAxisX, rotaAxisY, rotaAxisZ; //Axis of Quaternion rotation
-    private float relativeAxisX, relativeAxisY, relativeAxisZ; //adjusted axies to simulate cube having 0, 0, 0 rotation
+		float verticalTilt = Input.GetAxis("Vertical")*maxTilt;
+		float horizontalTilt = -Input.GetAxis ("Horizontal")*maxTilt;
 
-    void Update()
-    {
+		transform.localRotation = Quaternion.Slerp (transform.localRotation, Quaternion.Euler (verticalTilt, 0, horizontalTilt), slerpSpeed * Time.deltaTime);
+    
 
-        //gets the position differential of the cursor between frames to calculate rotation of maze
-        newMouseX = Input.mousePosition.x;
-        newMouseY = Input.mousePosition.y;
-        if (Input.GetMouseButton(0))
-        {
-            //gets rotation axis from Cross of mouseDelta Vector and Camera vision direction vector
-            cursorDelta = new Vector3(newMouseX - oldMouseX, newMouseY - oldMouseY, 0.0f);
+		Vector3[] dirVectors = {
+			transform.up, //up
+			-transform.up, //down
+			transform.right, //right
+			-transform.right, //left
+			-transform.forward, //front
+			transform.forward //back
+		};
+		Vector3 facingUp = new Vector3();
+		float dot1 = 0;
 
-			intoCube = cameraRotator.transform.position - camera.transform.position;
-			transform.rotation = Quaternion.AngleAxis(rotationSpeed * Time.deltaTime, Vector3.Cross(cursorDelta, intoCube)) * transform.rotation;
-        }
+		foreach (Vector3 v in dirVectors) {
+			float dot2 = Vector3.Dot(v, Vector3.up);
+			if (dot2 > dot1)
+			{
+				dot1 = dot2;
+				facingUp = v;
+			}
+		}
 
-        oldMouseX = newMouseX;
-        oldMouseY = newMouseY;
-    }
+	}
 }

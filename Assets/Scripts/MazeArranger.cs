@@ -17,7 +17,7 @@ public class MazeArranger : MonoBehaviour {
 	// The absolute value of the biggest/smallest x/y/z position any wall block can be in.
 	// Equal to the big centre cube's width/2 + 0.5.
 	// Currently the cube is width 8, allowing 10x10 walls. 
-	private float mazeMax = 4.5f;
+	public float mazeMax = 4.5f;
 
 	// A made up maze.
 	// TODO: procedural generation of mazes.
