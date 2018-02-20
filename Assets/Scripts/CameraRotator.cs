@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraRotator : MonoBehaviour {
 
 	[SerializeField]
-    int rotationSpeed = 100;
+    int rotationSpeed = 200;
 	[SerializeField]
 	private GameObject cameraRotator;
 	[SerializeField]
