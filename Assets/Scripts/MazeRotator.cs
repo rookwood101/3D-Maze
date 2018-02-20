@@ -38,7 +38,7 @@ public class MazeRotator : MonoBehaviour {
 				dot1 = dot2;
 				facingUp = v;
 			}
-
 		}
+
 	}
 }
