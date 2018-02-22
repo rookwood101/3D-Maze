@@ -13,7 +13,7 @@ public class PickupPickuper : MonoBehaviour {
 	void OnTriggerEnter(Collider other) {
 		if (other.gameObject.CompareTag("Ball")) {
 			scoreUpdater.IncrementScore ();
-            GetComponent<AudioSource>().Play();
+            //GetComponent<AudioSource>().Play();
             Destroy (gameObject);
 		}
 	}
