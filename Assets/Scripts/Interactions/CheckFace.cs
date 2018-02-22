@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class CheckFace : MonoBehaviour {
 
-	private GameObject maze;
-	private GameObject ball;
-	private Coroutine SetBallParent;
+	private GameObject ball, maze;
+    [SerializeField]
+    private GameObject audioPrefab;
 
-	void Start() {
+    void Start() {
 		maze = GameObject.FindGameObjectWithTag ("Maze");
 		ball = GameObject.FindGameObjectWithTag ("Ball");
 	}
@@ -17,14 +17,10 @@ public class CheckFace : MonoBehaviour {
 	public void OnTriggerEnter(Collider other) {
 		if (other.gameObject.CompareTag ("Ball")) {
 			Debug.Log("Collided with ball");
-			ball.transform.parent = maze.transform;
 			maze.GetComponent<MazeRotator>().SetCurrentFace (gameObject);
-			Invoke ("UpdateBallParent", 2f);
+            GameObject rotateAudioClone = Instantiate(audioPrefab, transform.position, transform.rotation);
+            Invoke ("UpdateBallParent", 2f);
 
 		}
-	}
-
-	void UpdateBallParent() {
-		ball.transform.parent = null;
 	}
 }
