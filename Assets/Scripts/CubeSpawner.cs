@@ -10,10 +10,10 @@ public class CubeSpawner : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		Debug.Log ("Beginning Cube Spawning");
-	}
+        Instantiate(cube);
+    }
 	
 	// Update is called once per frame
 	void Update () {
-		Instantiate (cube); //You're re-instantiating the cube every update?
 	}
 }
