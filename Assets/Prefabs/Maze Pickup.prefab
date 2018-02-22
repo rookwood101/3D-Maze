@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114547207774176732}
   m_Layer: 0
   m_Name: Maze Pickup
-  m_TagString: Untagged
+  m_TagString: MazePickup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -95,6 +95,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1851b63e8affc49e29207555b4abb32e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioPrefab: {fileID: 1201432606064342, guid: 65c714f1ba6270543a0dbf0cc6780b7e,
+    type: 2}
 --- !u!135 &135860832376484766
 SphereCollider:
   m_ObjectHideFlags: 1

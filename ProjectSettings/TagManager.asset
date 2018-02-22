@@ -12,6 +12,8 @@ TagManager:
   - Front
   - Back
   - Ball
+  - Score
+  - MazePickup
   layers:
   - Default
   - TransparentFX
