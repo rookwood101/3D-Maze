@@ -25,10 +25,6 @@ public class CameraRotator : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-		//axis for rotation of view direction
-		float otherticalTilt = Input.GetAxis ("Othertical");
-
         //gets the position differential of the cursor between frames to calculate rotation of maze
         newMouseX = Input.mousePosition.x;
         newMouseY = Input.mousePosition.y;

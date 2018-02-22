@@ -7,6 +7,7 @@ public class PickupPickuper : MonoBehaviour {
 
 	void Start() {
 		scoreUpdater = GameObject.FindGameObjectWithTag("Score").GetComponent<ScoreUpdater> ();
+		scoreUpdater.RegisterPickup ();
 	}
 
 	void OnTriggerEnter(Collider other) {

@@ -16,7 +16,6 @@ public class CheckFace : MonoBehaviour {
 
 	public void OnTriggerEnter(Collider other) {
 		if (other.gameObject.CompareTag ("Ball")) {
-			Debug.Log("Collided with ball");
 			ball.transform.parent = maze.transform;
 			maze.GetComponent<MazeRotator>().SetCurrentFace (gameObject);
 			Invoke ("UpdateBallParent", 2f);
