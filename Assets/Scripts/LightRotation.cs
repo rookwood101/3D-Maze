@@ -5,7 +5,7 @@ using UnityEngine;
 public class LightRotation : MonoBehaviour {
 
 	void Update () {
-        transform.RotateAround(new Vector3(0,15,0), new Vector3(0,1,0), 0.2f);
+        transform.RotateAround(new Vector3(0,0,0), new Vector3(0,1,0), 0.2f);
 	}
 
 }

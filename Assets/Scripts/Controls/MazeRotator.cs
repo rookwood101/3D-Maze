@@ -24,7 +24,7 @@ public class MazeRotator : MonoBehaviour {
 
     void Update() {
 
-        //gets value of view direction when rotating with Q and E
+        //gets value of view direction when rotating with Q and E (O-3)
         if (Input.GetKeyDown(KeyCode.Q)) {
             viewDirection--;
             rotateAudioClone = Instantiate(rotateAudioPrefab, transform.position, transform.rotation);
@@ -38,6 +38,7 @@ public class MazeRotator : MonoBehaviour {
         if (viewDirection < 0)
             viewDirection = 3;
 
+        //sets the axies of tilt depending on the Y orientation of the maze (view direction)
         switch (viewDirection) {
             case 0:
                 verticalTilt = Input.GetAxis("Vertical") * maxTilt;
@@ -57,9 +58,9 @@ public class MazeRotator : MonoBehaviour {
                 break;
         }
 
-        //rotate entire cube
+        //rotate from center when CheckFace triggered
         transform.localRotation = Quaternion.Slerp (transform.localRotation, currentFaceDirection, slerpSpeed * Time.deltaTime);
-        //tilt from top
+        //rotate from top using tilt values
         transform.parent.localRotation = Quaternion.Slerp (transform.parent.localRotation, Quaternion.Euler (verticalTilt, 90*viewDirection, horizontalTilt), slerpSpeed * Time.deltaTime);
 
 	}

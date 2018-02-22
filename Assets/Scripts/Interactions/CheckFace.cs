@@ -17,10 +17,8 @@ public class CheckFace : MonoBehaviour {
 	public void OnTriggerEnter(Collider other) {
 		if (other.gameObject.CompareTag ("Ball")) {
 			Debug.Log("Collided with ball");
-			maze.GetComponent<MazeRotator>().SetCurrentFace (gameObject);
+            maze.GetComponent<MazeRotator>().SetCurrentFace (gameObject);
             GameObject rotateAudioClone = Instantiate(audioPrefab, transform.position, transform.rotation);
-            Invoke ("UpdateBallParent", 2f);
-
 		}
 	}
 }
