@@ -3,4 +3,3 @@
  * Procedural generation
  * Better lighting
  * Menu screen
- * Fix Lighting on next level
