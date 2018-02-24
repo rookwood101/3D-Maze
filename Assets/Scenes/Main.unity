@@ -1328,10 +1328,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720aba72bc8a4298a83e1b5681eb18b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mazeWall: {fileID: 1483118289244484, guid: 37b4fbfd1d6074e77af6a216db956e9a, type: 2}
+  mazeWallBottom: {fileID: 1207612340663010, guid: a6e20208062ba48c1935cf7a1f2074ea,
+    type: 2}
+  mazeWallRight: {fileID: 1207612340663010, guid: 17cd7559a2d504757b8923a001724cde,
+    type: 2}
   mazePickup: {fileID: 1433396671575658, guid: 4e97d44e107344571bca7458f23d64f4, type: 2}
   mazeParent: {fileID: 1620254616}
-  mazeMax: 4.5
+  mazeMax: 3.5
+  mazeGenerationWidth: 8
 --- !u!4 &1620254618
 Transform:
   m_ObjectHideFlags: 0
