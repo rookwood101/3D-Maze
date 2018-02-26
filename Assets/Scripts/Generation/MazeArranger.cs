@@ -26,7 +26,6 @@ public class MazeArranger : MonoBehaviour
     // Maze pickup prefab (currently a small sphere)
     [SerializeField]
     private GameObject mazePickup;
-
     // The parent object that holds the entire maze cube.
     [SerializeField]
     private GameObject mazeParent;
@@ -38,6 +37,8 @@ public class MazeArranger : MonoBehaviour
     private float mazeMax;
     [SerializeField]
     private int mazeGenerationWidth = 10;
+    [SerializeField]
+    private float pickupSpawnChance = 0.2f;
 
     private System.Random rnd;
     private Dictionary<CubeFace, RectInt> cubeFaceBounds;
@@ -169,12 +170,16 @@ public class MazeArranger : MonoBehaviour
                 break;
         }
 
-        Quaternion wallRotation = Quaternion.FromToRotation(Vector3.up, Vector3.Cross(nextColumnDirection, nextRowDirection));
+        Quaternion wallRotation = Quaternion.FromToRotation(Vector3.back, Vector3.Cross(nextColumnDirection, nextRowDirection));
 
         for (int row = 0; row < maze.GetLength(0); row++)
         {
             for (int column = 0; column < maze.GetLength(1); column++)
             {
+                if ((float)rnd.NextDouble() <= pickupSpawnChance) {
+                    // spawn a pickup some percentage of the time
+                    Instantiate(mazePickup, start + (column * nextColumnDirection) + (row * nextRowDirection),  wallRotation * mazePickup.transform.rotation, mazeParent.transform);
+                }
                 if ((maze[row, column] & (int)Direction.Down) == 0)
                 {
                     if (column == 0) {
