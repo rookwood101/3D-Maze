@@ -2,9 +2,7 @@
  * Make marble feel less sluggish
  * Better lighting
  * Menu screen
- * Fix ball placement
- * Add pickups back in
- * Fix dodgy cube rotation
- * Fix dodgy outer walls
- * Add extra cube walls to edges of central cube where necessary
+ * Fix some mazes being unsolvable - due to adding extra walls
+    - Only add extra walls sometimes!
  * Make outer walls look like glass instead of invisible
+ * Add number of balls left
