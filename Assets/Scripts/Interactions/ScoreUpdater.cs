@@ -23,4 +23,7 @@ public class ScoreUpdater : MonoBehaviour {
 	public void RegisterPickup() {
 		pickupCount++;
 	}
+	public void UnregisterPickup() {
+		pickupCount--;
+	}
 }

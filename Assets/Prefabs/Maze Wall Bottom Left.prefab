@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 23766435738740892}
   m_Layer: 0
   m_Name: Maze Wall
-  m_TagString: Untagged
+  m_TagString: Maze Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 4117902803543394}
   m_Layer: 0
   m_Name: Maze Wall Bottom Left
-  m_TagString: Untagged
+  m_TagString: Maze Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
