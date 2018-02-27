@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 public class ScoreUpdater : MonoBehaviour {
 	[SerializeField]
 	private Text scoreText;
+	[SerializeField]
+	private Text pickupCountText;
 
 	private int score = 0;
 	private int pickupCount = 0;
@@ -22,8 +24,10 @@ public class ScoreUpdater : MonoBehaviour {
 	}
 	public void RegisterPickup() {
 		pickupCount++;
+		pickupCountText.text = pickupCount.ToString();
 	}
 	public void UnregisterPickup() {
 		pickupCount--;
+		pickupCountText.text = pickupCount.ToString();
 	}
 }
