@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class TutorialKeyPress : MonoBehaviour {
 
+	private float fadeWait = 20;
 	[SerializeField]
 	private KeyCode myKey;
 	private Renderer rend;
 
 	void Start() {
 		rend = GetComponent<Renderer>();
+		Invoke ("Fade", fadeWait);
 	}
 
 
@@ -25,6 +27,8 @@ public class TutorialKeyPress : MonoBehaviour {
 			color.a -= 0.1f;
 			rend.material.color = color;
 			Invoke ("Fade", 0.05f);
+		} else if (rend.material.color.a <= 0) {
+			Destroy (gameObject);
 		}
 	}
 }
