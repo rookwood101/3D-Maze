@@ -19,8 +19,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4879100284484098}
-  - component: {fileID: 114759826627900796}
   - component: {fileID: 82811234719972972}
+  - component: {fileID: 114357573861357234}
   m_Layer: 0
   m_Name: Rotate Audio
   m_TagString: Untagged
@@ -121,7 +121,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!114 &114759826627900796
+--- !u!114 &114357573861357234
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -129,6 +129,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1932167932556304}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b164b789fcc1ba4ca726129061fc000, type: 3}
+  m_Script: {fileID: 11500000, guid: 91cd0a63c020c634cad3c978a130c70c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
