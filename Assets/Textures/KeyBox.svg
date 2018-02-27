@@ -15,7 +15,10 @@
    id="svg4470"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="KeyBox.svg">
+   sodipodi:docname="KeyBox.svg"
+   inkscape:export-filename="/data/alex/sync/Documents/Soton/Year 3/Game Design and Development/3D Maze/Assets/Textures/Q.png"
+   inkscape:export-xdpi="171.94"
+   inkscape:export-ydpi="171.94">
   <defs
      id="defs4472" />
   <sodipodi:namedview
@@ -26,10 +29,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2.8"
-     inkscape:cx="115.06196"
-     inkscape:cy="14.006236"
+     inkscape:cx="114.70482"
+     inkscape:cy="-14.565193"
      inkscape:document-units="px"
-     inkscape:current-layer="layer5"
+     inkscape:current-layer="layer7"
      showgrid="false"
      fit-margin-top="0"
      fit-margin-left="0"
@@ -48,7 +51,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -57,7 +60,7 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(-281.5714,-282.50506)"
-     style="display:inline">
+     style="display:none">
     <g
        id="g14"
        transform="translate(76.6514,179.72406)">
@@ -143,4 +146,41 @@
            style="stroke:#000000;stroke-width:5.40000057;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" /></flowRegion><flowPara
          id="flowPara4144-4-0"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Arial Rounded MT Bold';-inkscape-font-specification:'Arial Rounded MT Bold, ';stroke:#000000;stroke-width:5.40000057;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">D</flowPara></flowRoot>  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer6"
+     inkscape:label="Layer 6"
+     style="display:none">
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4138-9-0-3"
+       style="font-style:normal;font-weight:normal;font-size:70.87825012px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:5.40000057;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       transform="translate(43.119771,40.767375)"><flowRegion
+         id="flowRegion4140-8-5-6"><rect
+           id="rect4142-0-5-7"
+           width="174.03142"
+           height="106.95022"
+           x="-1.2103113"
+           y="-20.848007"
+           style="stroke:#000000;stroke-width:5.40000057;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" /></flowRegion><flowPara
+         id="flowPara4144-4-0-5"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Arial Rounded MT Bold';-inkscape-font-specification:'Arial Rounded MT Bold, ';stroke:#000000;stroke-width:5.40000057;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">E</flowPara></flowRoot>  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer7"
+     inkscape:label="Layer 7">
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4138-9-0-3-9"
+       style="font-style:normal;font-weight:normal;font-size:70.87825012px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:5.40000057;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       transform="translate(38.793706,38.863906)"><flowRegion
+         id="flowRegion4140-8-5-6-1"><rect
+           id="rect4142-0-5-7-2"
+           width="174.03142"
+           height="106.95022"
+           x="-1.2103113"
+           y="-20.848007"
+           style="stroke:#000000;stroke-width:5.40000057;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" /></flowRegion><flowPara
+         id="flowPara4144-4-0-5-7"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Arial Rounded MT Bold';-inkscape-font-specification:'Arial Rounded MT Bold, ';stroke:#000000;stroke-width:5.40000057;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">Q</flowPara></flowRoot>  </g>
 </svg>
