@@ -182,37 +182,32 @@ public class MazeArranger : MonoBehaviour
                 }
                 if ((maze[row, column] & (int)Direction.Down) == 0)
                 {
-                    if (column == 0) {
-                        Instantiate(mazeWallBottomLeft, start + (column * nextColumnDirection) + (row * nextRowDirection), wallRotation * mazeWallBottomLeft.transform.rotation, mazeParent.transform);
-                    }
-                    if (column == maze.GetLength(1) - 1) {
-                        Instantiate(mazeWallBottomRight, start + (column * nextColumnDirection) + (row * nextRowDirection), wallRotation * mazeWallBottomRight.transform.rotation, mazeParent.transform);
-                    }
-                    if (row == maze.GetLength(0) - 1) {
-                        Instantiate(mazeWallBottom, start + (column * nextColumnDirection) + ((row + 0.5f) * nextRowDirection),  wallRotation * mazeWallBottom.transform.rotation, mazeParent.transform);
-                    }
+                    // if (column == 0) {
+                    //     Instantiate(mazeWallBottomLeft, start + (column * nextColumnDirection) + (row * nextRowDirection), wallRotation * mazeWallBottomLeft.transform.rotation, mazeParent.transform);
+                    // }
+                    // if (column == maze.GetLength(1) - 1) {
+                    //     Instantiate(mazeWallBottomRight, start + (column * nextColumnDirection) + (row * nextRowDirection), wallRotation * mazeWallBottomRight.transform.rotation, mazeParent.transform);
+                    // }
+                    // if (row == maze.GetLength(0) - 1) {
+                    //     Instantiate(mazeWallBottom, start + (column * nextColumnDirection) + ((row + 0.5f) * nextRowDirection),  wallRotation * mazeWallBottom.transform.rotation, mazeParent.transform);
+                    // }
                     // If there is not a path downwards,
                     // place a wall at the bottom of this cell
                     Instantiate(mazeWallBottom, start + (column * nextColumnDirection) + (row * nextRowDirection),  wallRotation * mazeWallBottom.transform.rotation, mazeParent.transform);
                 }
                 else if ((maze[row, column] & (int)Direction.Right) == 0)
                 {
-                    if (row == 0) {
-                        Instantiate(mazeWallRightTop, start + (column * nextColumnDirection) + (row * nextRowDirection), wallRotation * mazeWallRightTop.transform.rotation, mazeParent.transform);
-                    }
-                    if (row == maze.GetLength(0) - 1) {
-                        Instantiate(mazeWallRightBottom, start + (column * nextColumnDirection) + (row * nextRowDirection), wallRotation * mazeWallRightBottom.transform.rotation, mazeParent.transform);
-                    }
-                    if (column == maze.GetLength(1) - 1) {
-                        Instantiate(mazeWallRight, start + ((column + 0.5f) * nextColumnDirection) + (row * nextRowDirection),  wallRotation * mazeWallRight.transform.rotation, mazeParent.transform);
-                    }
+                    // if (row == 0) {
+                    //     Instantiate(mazeWallRightTop, start + (column * nextColumnDirection) + (row * nextRowDirection), wallRotation * mazeWallRightTop.transform.rotation, mazeParent.transform);
+                    // }
+                    // if (row == maze.GetLength(0) - 1) {
+                    //     Instantiate(mazeWallRightBottom, start + (column * nextColumnDirection) + (row * nextRowDirection), wallRotation * mazeWallRightBottom.transform.rotation, mazeParent.transform);
+                    // }
+                    // if (column == maze.GetLength(1) - 1) {
+                    //     Instantiate(mazeWallRight, start + ((column + 0.5f) * nextColumnDirection) + (row * nextRowDirection),  wallRotation * mazeWallRight.transform.rotation, mazeParent.transform);
+                    // }
                     // If there is not a path rightwards
                     Instantiate(mazeWallRight, start + (column * nextColumnDirection) + (row * nextRowDirection), wallRotation * mazeWallRight.transform.rotation, mazeParent.transform);
-                }
-
-                if (row == 0 && (maze[row, column] & (int)Direction.Up) == 0) {
-                    // If we're at the top of a face and their's no path upwards
-                    // Add a special wall
                 }
                 // TODO: Add pickups
             }
