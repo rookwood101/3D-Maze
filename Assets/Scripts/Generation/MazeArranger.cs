@@ -49,7 +49,9 @@ public class MazeArranger : MonoBehaviour
     private Dictionary<Direction, Direction> oppositeDirections;
 
     private Dictionary<Direction, Direction> cw90Directions;
-    private Dictionary<Direction, Direction> ccw90Directions; 
+    private Dictionary<Direction, Direction> ccw90Directions;
+
+    private LevelController levelController;
 
     // At the start, generate a maze for each face.
     void Start()
@@ -93,14 +95,35 @@ public class MazeArranger : MonoBehaviour
         ccw90Directions[Direction.Right] = Direction.Up;
         ccw90Directions[Direction.Left] = Direction.Down;
 
-        GenerateMazeFrom(Vector2Int.zero);
+        levelController = GameObject.Find("Level Controller").GetComponent<LevelController>();
 
-        ArrangeMazeForFace(CubeFace.Right);
-        ArrangeMazeForFace(CubeFace.Left);
+        if (levelController.GetLevelCount() > 0) {
+            GenerateMazeFrom(Vector2Int.zero);
+            ArrangeMazeForFace(CubeFace.Right);
+            ArrangeMazeForFace(CubeFace.Left);
+            ArrangeMazeForFace(CubeFace.Bottom);
+            ArrangeMazeForFace(CubeFace.Front);
+            ArrangeMazeForFace(CubeFace.Back);
+        } else if (levelController.GetLevelCount() == 0) {
+            GenerateTutorialMazeFrom(new Vector2Int(0, w));
+            CreateTutorialBorder();
+        }
         ArrangeMazeForFace(CubeFace.Top);
-        ArrangeMazeForFace(CubeFace.Bottom);
-        ArrangeMazeForFace(CubeFace.Front);
-        ArrangeMazeForFace(CubeFace.Back);
+    }
+
+    void CreateTutorialBorder() {
+        // Creates a border around the top face
+        Vector3 start = new Vector3(-mazeMax, mazeMax, mazeMax);
+        Vector3 nextColumnDirection = Vector3.right;
+        Vector3 nextRowDirection = Vector3.back;
+        Quaternion wallRotation = Quaternion.FromToRotation(Vector3.back, Vector3.Cross(nextColumnDirection, nextRowDirection));
+        for (float pos = -0.5f; pos < mazeGenerationWidth; pos++)
+        {
+            Instantiate(mazeWallBottom, start + (pos * nextColumnDirection) + (-1 * nextRowDirection),  wallRotation * mazeWallBottom.transform.rotation, mazeParent.transform);
+            Instantiate(mazeWallBottom, start + (pos * nextColumnDirection) + ((mazeGenerationWidth - 0.5f) * nextRowDirection),  wallRotation * mazeWallBottom.transform.rotation, mazeParent.transform);
+            Instantiate(mazeWallRight, start + (-1 * nextColumnDirection) + (pos * nextRowDirection),  wallRotation * mazeWallBottom.transform.rotation, mazeParent.transform);
+            Instantiate(mazeWallRight, start + ((mazeGenerationWidth - 0.5f) * nextColumnDirection) + (pos * nextRowDirection),  wallRotation * mazeWallBottom.transform.rotation, mazeParent.transform);
+        }
     }
 
     // Places mazeWalls (cubes) in the pattern of the maze.
@@ -182,30 +205,12 @@ public class MazeArranger : MonoBehaviour
                 }
                 if ((maze[row, column] & (int)Direction.Down) == 0)
                 {
-                    // if (column == 0) {
-                    //     Instantiate(mazeWallBottomLeft, start + (column * nextColumnDirection) + (row * nextRowDirection), wallRotation * mazeWallBottomLeft.transform.rotation, mazeParent.transform);
-                    // }
-                    // if (column == maze.GetLength(1) - 1) {
-                    //     Instantiate(mazeWallBottomRight, start + (column * nextColumnDirection) + (row * nextRowDirection), wallRotation * mazeWallBottomRight.transform.rotation, mazeParent.transform);
-                    // }
-                    // if (row == maze.GetLength(0) - 1) {
-                    //     Instantiate(mazeWallBottom, start + (column * nextColumnDirection) + ((row + 0.5f) * nextRowDirection),  wallRotation * mazeWallBottom.transform.rotation, mazeParent.transform);
-                    // }
                     // If there is not a path downwards,
                     // place a wall at the bottom of this cell
                     Instantiate(mazeWallBottom, start + (column * nextColumnDirection) + (row * nextRowDirection),  wallRotation * mazeWallBottom.transform.rotation, mazeParent.transform);
                 }
                 else if ((maze[row, column] & (int)Direction.Right) == 0)
                 {
-                    // if (row == 0) {
-                    //     Instantiate(mazeWallRightTop, start + (column * nextColumnDirection) + (row * nextRowDirection), wallRotation * mazeWallRightTop.transform.rotation, mazeParent.transform);
-                    // }
-                    // if (row == maze.GetLength(0) - 1) {
-                    //     Instantiate(mazeWallRightBottom, start + (column * nextColumnDirection) + (row * nextRowDirection), wallRotation * mazeWallRightBottom.transform.rotation, mazeParent.transform);
-                    // }
-                    // if (column == maze.GetLength(1) - 1) {
-                    //     Instantiate(mazeWallRight, start + ((column + 0.5f) * nextColumnDirection) + (row * nextRowDirection),  wallRotation * mazeWallRight.transform.rotation, mazeParent.transform);
-                    // }
                     // If there is not a path rightwards
                     Instantiate(mazeWallRight, start + (column * nextColumnDirection) + (row * nextRowDirection), wallRotation * mazeWallRight.transform.rotation, mazeParent.transform);
                 }
@@ -213,6 +218,18 @@ public class MazeArranger : MonoBehaviour
             }
         }
 
+    }
+
+    void GenerateTutorialMazeFrom(Vector2Int startingPoint) {
+        Shuffle(rnd, directions);
+        foreach (Direction direction in directions) {
+            Vector2Int newPosition = startingPoint + directionVectors[direction];
+            if (newPosition.x >= 0 && newPosition.x < mazeGenerationWidth && newPosition.y >= mazeGenerationWidth && newPosition.y < 2*mazeGenerationWidth && !IsPositionVisited(newPosition)) {
+                SetPositionBit(startingPoint, (int)direction);
+                SetPositionBit(newPosition, (int)oppositeDirections[direction]);
+                GenerateTutorialMazeFrom(newPosition);
+            }
+        }
     }
 
     // 0,0 is the top left of the front face
