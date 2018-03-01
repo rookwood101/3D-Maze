@@ -15,6 +15,7 @@ TagManager:
   - Score
   - MazePickup
   - Maze Wall
+  - SideArrows
   layers:
   - Default
   - TransparentFX

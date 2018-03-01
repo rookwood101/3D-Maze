@@ -17,6 +17,8 @@ public class CheckFace : MonoBehaviour {
 		if (other.gameObject.CompareTag ("Ball")) {
 			mazeRotator.SetCurrentFace (gameObject);
             Instantiate(audioPrefab, transform.position, transform.rotation);
+            GameObject SideArrows = GameObject.FindGameObjectWithTag ("SideArrows");
+            GameObject.Destroy(SideArrows);
 		}
 	}
 }
