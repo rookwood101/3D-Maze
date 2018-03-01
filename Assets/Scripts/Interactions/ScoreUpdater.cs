@@ -19,6 +19,12 @@ public class ScoreUpdater : MonoBehaviour {
 
 		if (score == pickupCount) {
 			Debug.Log ("Level Complete!");
+
+			int levelsCompleted = PlayerPrefs.GetInt("levelsCompleted", 0);
+			levelsCompleted++;
+			PlayerPrefs.SetInt("levelsCompleted", levelsCompleted);
+			PlayerPrefs.Save();
+			
 			SceneManager.LoadScene (SceneManager.GetActiveScene ().name);
 		}
 	}
