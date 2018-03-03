@@ -13,19 +13,9 @@ public class MazeArranger : MonoBehaviour
     
     // Maze wall prefab
     [SerializeField]
-    private GameObject mazeWallBottom;
-    [SerializeField]
     private GameObject mazeWallTop;
     [SerializeField]
     private GameObject mazeWallRight;
-    [SerializeField]
-    private GameObject mazeWallRightTop;
-    [SerializeField]
-    private GameObject mazeWallRightBottom;
-    [SerializeField]
-    private GameObject mazeWallBottomLeft;
-    [SerializeField]
-    private GameObject mazeWallBottomRight;
     // Maze pickup prefab (currently a small sphere)
     [SerializeField]
     private GameObject mazePickup;
@@ -126,8 +116,8 @@ public class MazeArranger : MonoBehaviour
         Quaternion wallRotation = Quaternion.FromToRotation(Vector3.back, wallHeightDirection);
         for (float pos = -0.5f; pos < mazeGenerationWidth-0.5f; pos+=0.5f)
         {
-            Instantiate(mazeWallTop, start + (pos * nextColumnDirection) + (-1 * nextRowDirection) + (mazeWallHeight * wallHeightDirection),  wallRotation * mazeWallBottom.transform.rotation, mazeParent.transform);
-            Instantiate(mazeWallRight, start + (-1 * nextColumnDirection) + (pos * nextRowDirection) + (mazeWallHeight * wallHeightDirection),  wallRotation * mazeWallBottom.transform.rotation, mazeParent.transform);
+            Instantiate(mazeWallTop, start + (pos * nextColumnDirection) + (-1 * nextRowDirection) + (mazeWallHeight * wallHeightDirection),  wallRotation * mazeWallTop.transform.rotation, mazeParent.transform);
+            Instantiate(mazeWallRight, start + (-1 * nextColumnDirection) + (pos * nextRowDirection) + (mazeWallHeight * wallHeightDirection),  wallRotation * mazeWallRight.transform.rotation, mazeParent.transform);
         }
     }
 
@@ -213,7 +203,7 @@ public class MazeArranger : MonoBehaviour
                 {
                     // If there is not a path downwards,
                     // place a wall at the bottom of this cell
-                    Instantiate(mazeWallTop, start + (column * nextColumnDirection) + (row * nextRowDirection) + (mazeWallHeight * wallHeightDirection),  wallRotation * mazeWallBottom.transform.rotation, mazeParent.transform);
+                    Instantiate(mazeWallTop, start + (column * nextColumnDirection) + (row * nextRowDirection) + (mazeWallHeight * wallHeightDirection),  wallRotation * mazeWallTop.transform.rotation, mazeParent.transform);
                 }
                 if ((maze[row, column] & (int)Direction.Right) == 0)
                 {
