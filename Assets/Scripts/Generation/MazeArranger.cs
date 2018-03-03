@@ -105,7 +105,7 @@ public class MazeArranger : MonoBehaviour
             ArrangeMazeForFace(CubeFace.Front);
             ArrangeMazeForFace(CubeFace.Back);
         } else if (levelController.GetLevelCount() == 0) {
-            GenerateTutorialMazeFrom(new Vector2Int(0, w));
+            GenerateTutorialMazeFrom(new Vector2Int(w/2, w + w/2));
             CreateTutorialBorder();
         }
         ArrangeMazeForFace(CubeFace.Top);

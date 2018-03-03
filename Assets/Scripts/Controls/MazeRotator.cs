@@ -12,14 +12,15 @@ public class MazeRotator : MonoBehaviour {
     private GameObject rotateAudioPrefab;
     private GameObject ball;
     [SerializeField]
-    private PhysicMaterial material;
 	private Quaternion currentFaceDirection = Quaternion.identity;
     private int viewDirection = 0;
     private float verticalTilt = 0;
     private float horizontalTilt = 0;
+    private Rigidbody ballRigidbody;
     
     void Start() {
         ball = GameObject.FindGameObjectWithTag("Ball");
+        ballRigidbody = ball.GetComponent<Rigidbody>();
     }
 
     void Update() {
@@ -66,10 +67,8 @@ public class MazeRotator : MonoBehaviour {
 	}
 
 	public void SetCurrentFace (GameObject face) {
-
-        IsRotating(true);
-        Invoke(IsRotating(false), 1);
-
+        ballRigidbody.useGravity = false;
+        Invoke("DisableKinematicBall", 0.3f);
         if (face.CompareTag ("Right")) {
 			currentFaceDirection = Quaternion.Euler (0, 0, 90) * currentFaceDirection;
 		} else if (face.CompareTag ("Left")) {
@@ -81,16 +80,8 @@ public class MazeRotator : MonoBehaviour {
 		}
 	}
 
-    private string IsRotating(bool rotating)
-    {
-        if (rotating == true) {
-            ball.GetComponent<PhysicMaterial>().dynamicFriction = 1;
-            ball.GetComponent<PhysicMaterial>().staticFriction = 1000000;
-        } else {
-            ball.GetComponent<PhysicMaterial>().dynamicFriction = 0.2f;
-            ball.GetComponent<PhysicMaterial>().staticFriction = 0.1f;
-        }
-        return "";
+    void DisableKinematicBall() {
+        ballRigidbody.useGravity = true;
     }
 
 }
