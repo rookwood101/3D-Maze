@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class TutorialKeyPress : MonoBehaviour {
 
-	private float fadeWait = 20;
 	[SerializeField]
 	private KeyCode myKey;
 	private Renderer rend;

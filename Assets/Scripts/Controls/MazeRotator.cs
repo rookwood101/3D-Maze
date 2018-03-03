@@ -10,20 +10,16 @@ public class MazeRotator : MonoBehaviour {
 	private int maxTilt;
     [SerializeField]
     private GameObject rotateAudioPrefab;
-    GameObject rotateAudioClone;
     private GameObject ball;
     [SerializeField]
     private PhysicMaterial material;
-    private GameObject currentFace; //face with ball on it
 	private Quaternion currentFaceDirection = Quaternion.identity;
-    private bool tilt = false;
     private int viewDirection = 0;
     private float verticalTilt = 0;
     private float horizontalTilt = 0;
     
     void Start() {
         ball = GameObject.FindGameObjectWithTag("Ball");
-        currentFace = GameObject.FindGameObjectWithTag ("Top");
     }
 
     void Update() {
@@ -31,11 +27,11 @@ public class MazeRotator : MonoBehaviour {
         //gets value of view direction when rotating with Q and E (O-3)
         if (Input.GetKeyDown(KeyCode.Q)) {
             viewDirection--;
-            rotateAudioClone = Instantiate(rotateAudioPrefab, transform.position, transform.rotation);
+            Instantiate(rotateAudioPrefab, transform.position, transform.rotation);
         }
         if (Input.GetKeyDown(KeyCode.E)) {
             viewDirection++;
-            rotateAudioClone = Instantiate(rotateAudioPrefab, transform.position, transform.rotation);
+            Instantiate(rotateAudioPrefab, transform.position, transform.rotation);
         }
         if (viewDirection > 3)
             viewDirection = 0;
@@ -73,8 +69,6 @@ public class MazeRotator : MonoBehaviour {
 
         IsRotating(true);
         Invoke(IsRotating(false), 1);
-
-        currentFace = face;
 
         if (face.CompareTag ("Right")) {
 			currentFaceDirection = Quaternion.Euler (0, 0, 90) * currentFaceDirection;
