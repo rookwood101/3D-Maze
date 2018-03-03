@@ -11,7 +11,6 @@ public class MazeRotator : MonoBehaviour {
     [SerializeField]
     private GameObject rotateAudioPrefab;
     private GameObject ball;
-    [SerializeField]
 	private Quaternion currentFaceDirection = Quaternion.identity;
     private int viewDirection = 0;
     private float verticalTilt = 0;

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class MazeArranger : MonoBehaviour
@@ -36,9 +37,9 @@ public class MazeArranger : MonoBehaviour
     [SerializeField]
     private float mazeMax;
     [SerializeField]
-    private int mazeGenerationWidth = 10;
+    private int mazeGenerationWidth;
     [SerializeField]
-    private float pickupSpawnChance = 0.2f;
+    private float pickupSpawnChance;
 
     private System.Random rnd;
     private Dictionary<CubeFace, RectInt> cubeFaceBounds;
@@ -107,6 +108,7 @@ public class MazeArranger : MonoBehaviour
         } else if (levelController.GetLevelCount() == 0) {
             GenerateTutorialMazeFrom(new Vector2Int(w/2, w + w/2));
             CreateTutorialBorder();
+            PrintMaze(mazes[CubeFace.Top]);
         }
         ArrangeMazeForFace(CubeFace.Top);
     }
@@ -454,6 +456,35 @@ public class MazeArranger : MonoBehaviour
             T temp = array[n];
             array[n] = array[k];
             array[k] = temp;
+        }
+    }
+
+    public static void PrintMaze(int[,] maze) {
+        StreamWriter writer = new StreamWriter("maze.txt", true, System.Text.Encoding.UTF8);
+        
+        for (int i=0; i<maze.GetLength(0); i++) {
+            for (int j=0; j<maze.GetLength(1); j++) {
+                if ((maze[i,j] & (int)Direction.Up) != 0) {
+                    writer.Write('↑');
+                } else {
+                    writer.Write(' ');
+                }
+                if ((maze[i,j] & (int)Direction.Down) != 0) {
+                    writer.Write('↓');
+                } else {
+                    writer.Write(' ');
+                }
+                if ((maze[i,j] & (int)Direction.Left) != 0) {
+                    writer.Write('←');
+                } else {
+                    writer.Write(' ');
+                }
+                if ((maze[i,j] & (int)Direction.Right) != 0) {
+                    writer.Write('→');
+                } else {
+                    writer.Write(' ');
+                }
+            }
         }
     }
 }

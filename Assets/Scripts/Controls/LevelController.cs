@@ -8,7 +8,7 @@ public class LevelController : MonoBehaviour {
 	// It exists just to keep track of how many times the level
 	// has been reloaded.
 	[SerializeField]
-	private static int levelCount = 0;
+	private static int levelCount;
 
 	void Start () {
 		SceneManager.sceneLoaded += OnSceneLoaded;
