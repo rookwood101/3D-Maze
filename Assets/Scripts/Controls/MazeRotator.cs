@@ -11,15 +11,19 @@ public class MazeRotator : MonoBehaviour {
     [SerializeField]
     private GameObject rotateAudioPrefab;
     GameObject rotateAudioClone;
+    private GameObject ball;
+    [SerializeField]
+    private PhysicMaterial material;
     private GameObject currentFace; //face with ball on it
 	private Quaternion currentFaceDirection = Quaternion.identity;
     private bool tilt = false;
     private int viewDirection = 0;
     private float verticalTilt = 0;
     private float horizontalTilt = 0;
-
+    
     void Start() {
-		currentFace = GameObject.FindGameObjectWithTag ("Top");
+        ball = GameObject.FindGameObjectWithTag("Ball");
+        currentFace = GameObject.FindGameObjectWithTag ("Top");
     }
 
     void Update() {
@@ -66,9 +70,13 @@ public class MazeRotator : MonoBehaviour {
 	}
 
 	public void SetCurrentFace (GameObject face) {
-		currentFace = face;
 
-		if (face.CompareTag ("Right")) {
+        IsRotating(true);
+        Invoke(IsRotating(false), 1);
+
+        currentFace = face;
+
+        if (face.CompareTag ("Right")) {
 			currentFaceDirection = Quaternion.Euler (0, 0, 90) * currentFaceDirection;
 		} else if (face.CompareTag ("Left")) {
 			currentFaceDirection = Quaternion.Euler (0, 0, -90) * currentFaceDirection;
@@ -78,4 +86,17 @@ public class MazeRotator : MonoBehaviour {
 			currentFaceDirection = Quaternion.Euler (-90, 0, 0) * currentFaceDirection;
 		}
 	}
+
+    private string IsRotating(bool rotating)
+    {
+        if (rotating == true) {
+            ball.GetComponent<PhysicMaterial>().dynamicFriction = 1;
+            ball.GetComponent<PhysicMaterial>().staticFriction = 1000000;
+        } else {
+            ball.GetComponent<PhysicMaterial>().dynamicFriction = 0.2f;
+            ball.GetComponent<PhysicMaterial>().staticFriction = 0.1f;
+        }
+        return "";
+    }
+
 }

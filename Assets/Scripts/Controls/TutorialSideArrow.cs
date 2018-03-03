@@ -36,10 +36,10 @@ public class TutorialSideArrow : MonoBehaviour
     {
         
         dist = Vector3.Distance(ball.GetComponent<Transform>().position, transform.position);
-        if (dist < 4.5)
+        if (dist < 4)
         {
             color = rend.material.color;
-            color.a = 1 - dist / 4.5f;
+            color.a = 2f - (dist) / 2;
             rend.material.color = color;
         }
         else {
