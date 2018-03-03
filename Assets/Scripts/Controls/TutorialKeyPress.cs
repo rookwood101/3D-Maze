@@ -12,11 +12,24 @@ public class TutorialKeyPress : MonoBehaviour {
     private string action;
     private Transform tr;
     private float xp, yp, zp, xr, yr, zr, xs, ys, zs = 0;
+    private LevelController levelController;
 
 	void Start() {
+        levelController = GameObject.Find("Level Controller").GetComponent<LevelController>();
+
+        if (levelController.GetLevelCount() == 0) {
+            if (!(myKey == KeyCode.W || myKey == KeyCode.A || myKey == KeyCode.S || myKey == KeyCode.D)) {
+                Destroy(gameObject);
+            }
+        } else if (levelController.GetLevelCount() == 1) {
+            if (!(myKey == KeyCode.Mouse0 || myKey == KeyCode.Q || myKey == KeyCode.E)) {
+                Destroy(gameObject);
+            }
+        } else {
+            Destroy(gameObject);
+        }
         tr = GetComponent<Transform>();
         rend = GetComponent<Renderer>();
-		Invoke ("Fade", fadeWait);
 	}
 
 

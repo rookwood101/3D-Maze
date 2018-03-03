@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SideArrow : MonoBehaviour
+public class TutorialSideArrow : MonoBehaviour
 {
 
     private Vector3 startPosition;
@@ -15,10 +15,15 @@ public class SideArrow : MonoBehaviour
     private GameObject ball;
     private float dist;
     private Color color;
+    private LevelController levelController;
 
     // Use this for initialization
     void Start()
     {
+        levelController = GameObject.Find("Level Controller").GetComponent<LevelController>();
+        if (levelController.GetLevelCount() != 1) {
+            Destroy(gameObject);
+        }
         rend = GetComponent<Renderer>();
         color = rend.material.color;
         ball = GameObject.FindGameObjectWithTag("Ball");
