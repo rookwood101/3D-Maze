@@ -2401,7 +2401,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 904458909}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 4.25, z: -0.25}
+  m_LocalPosition: {x: 0.25, y: 4.25, z: 0.25}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_Children: []
   m_Father: {fileID: 1620254618}
@@ -3968,6 +3968,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mazeWallBottom: {fileID: 1207612340663010, guid: a6e20208062ba48c1935cf7a1f2074ea,
     type: 2}
+  mazeWallTop: {fileID: 1207612340663010, guid: e4b1c3d46cd844e8ea54ec5065659df2,
+    type: 2}
   mazeWallRight: {fileID: 1207612340663010, guid: 17cd7559a2d504757b8923a001724cde,
     type: 2}
   mazeWallRightTop: {fileID: 1324783980249516, guid: d966407f77217459e860965336054765,
@@ -3983,6 +3985,7 @@ MonoBehaviour:
   mazeMax: 3.5
   mazeGenerationWidth: 8
   pickupSpawnChance: 0.05
+  mazeWallHeight: 0.75
 --- !u!4 &1620254618
 Transform:
   m_ObjectHideFlags: 0
@@ -4015,7 +4018,6 @@ MonoBehaviour:
   maxTilt: 15
   rotateAudioPrefab: {fileID: 1932167932556304, guid: 7f0adcaab2233ab41b46fa801359207b,
     type: 2}
-  material: {fileID: 13400000, guid: a00580d296997410bacd19be8eb3e6f5, type: 2}
 --- !u!1 &1638356715
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,6 +15,8 @@ public class MazeArranger : MonoBehaviour
     [SerializeField]
     private GameObject mazeWallBottom;
     [SerializeField]
+    private GameObject mazeWallTop;
+    [SerializeField]
     private GameObject mazeWallRight;
     [SerializeField]
     private GameObject mazeWallRightTop;
@@ -40,6 +42,8 @@ public class MazeArranger : MonoBehaviour
     private int mazeGenerationWidth;
     [SerializeField]
     private float pickupSpawnChance;
+    [SerializeField]
+    private float mazeWallHeight;
 
     private System.Random rnd;
     private Dictionary<CubeFace, RectInt> cubeFaceBounds;
@@ -108,23 +112,22 @@ public class MazeArranger : MonoBehaviour
         } else if (levelController.GetLevelCount() == 0) {
             GenerateTutorialMazeFrom(new Vector2Int(w/2, w + w/2));
             CreateTutorialBorder();
-            PrintMaze(mazes[CubeFace.Top]);
         }
         ArrangeMazeForFace(CubeFace.Top);
     }
 
     void CreateTutorialBorder() {
         // Creates a border around the top face
-        Vector3 start = new Vector3(-mazeMax, mazeMax, mazeMax);
+        Vector3 start = new Vector3(-mazeMax, mazeMax, -mazeMax);
         Vector3 nextColumnDirection = Vector3.right;
-        Vector3 nextRowDirection = Vector3.back;
-        Quaternion wallRotation = Quaternion.FromToRotation(Vector3.back, Vector3.Cross(nextColumnDirection, nextRowDirection));
-        for (float pos = -0.5f; pos < mazeGenerationWidth; pos++)
+        Vector3 nextRowDirection = Vector3.forward;
+
+        Vector3 wallHeightDirection = -Vector3.Cross(nextColumnDirection, nextRowDirection);
+        Quaternion wallRotation = Quaternion.FromToRotation(Vector3.back, wallHeightDirection);
+        for (float pos = -0.5f; pos < mazeGenerationWidth-0.5f; pos+=0.5f)
         {
-            Instantiate(mazeWallBottom, start + (pos * nextColumnDirection) + (-1 * nextRowDirection),  wallRotation * mazeWallBottom.transform.rotation, mazeParent.transform);
-            Instantiate(mazeWallBottom, start + (pos * nextColumnDirection) + ((mazeGenerationWidth - 0.5f) * nextRowDirection),  wallRotation * mazeWallBottom.transform.rotation, mazeParent.transform);
-            Instantiate(mazeWallRight, start + (-1 * nextColumnDirection) + (pos * nextRowDirection),  wallRotation * mazeWallBottom.transform.rotation, mazeParent.transform);
-            Instantiate(mazeWallRight, start + ((mazeGenerationWidth - 0.5f) * nextColumnDirection) + (pos * nextRowDirection),  wallRotation * mazeWallBottom.transform.rotation, mazeParent.transform);
+            Instantiate(mazeWallTop, start + (pos * nextColumnDirection) + (-1 * nextRowDirection) + (mazeWallHeight * wallHeightDirection),  wallRotation * mazeWallBottom.transform.rotation, mazeParent.transform);
+            Instantiate(mazeWallRight, start + (-1 * nextColumnDirection) + (pos * nextRowDirection) + (mazeWallHeight * wallHeightDirection),  wallRotation * mazeWallBottom.transform.rotation, mazeParent.transform);
         }
     }
 
@@ -160,42 +163,43 @@ public class MazeArranger : MonoBehaviour
         // Le Fr Ri
         //    Bo
         //
-        // The top left corner of each face on the net is then used as the start location, mapped to world space
+        // The bottom left corner of each face on the net is then used as the start location, mapped to world space
         switch (face)
         {
             case CubeFace.Right:
-                start = new Vector3(mazeMax, mazeMax, -mazeMax);
+                start = new Vector3(mazeMax, -mazeMax, -mazeMax);
                 nextColumnDirection = Vector3.forward;
-                nextRowDirection = Vector3.down;
+                nextRowDirection = Vector3.up;
                 break;
             case CubeFace.Left:
-                start = new Vector3(-mazeMax, mazeMax, mazeMax);
+                start = new Vector3(-mazeMax, -mazeMax, mazeMax);
                 nextColumnDirection = Vector3.back;
-                nextRowDirection = Vector3.down;
+                nextRowDirection = Vector3.up;
                 break;
             case CubeFace.Top:
-                start = new Vector3(-mazeMax, mazeMax, mazeMax);
-                nextColumnDirection = Vector3.right;
-                nextRowDirection = Vector3.back;
-                break;
-            case CubeFace.Bottom:
-                start = new Vector3(-mazeMax, -mazeMax, -mazeMax);
+                start = new Vector3(-mazeMax, mazeMax, -mazeMax);
                 nextColumnDirection = Vector3.right;
                 nextRowDirection = Vector3.forward;
                 break;
-            case CubeFace.Front:
-                start = new Vector3(-mazeMax, mazeMax, -mazeMax);
-                nextColumnDirection = Vector3.right;
-                nextRowDirection = Vector3.down;
-                break;
-            case CubeFace.Back:
+            case CubeFace.Bottom:
                 start = new Vector3(-mazeMax, -mazeMax, mazeMax);
+                nextColumnDirection = Vector3.right;
+                nextRowDirection = Vector3.back;
+                break;
+            case CubeFace.Front:
+                start = new Vector3(-mazeMax, -mazeMax, -mazeMax);
                 nextColumnDirection = Vector3.right;
                 nextRowDirection = Vector3.up;
                 break;
+            case CubeFace.Back:
+                start = new Vector3(-mazeMax, mazeMax, mazeMax);
+                nextColumnDirection = Vector3.right;
+                nextRowDirection = Vector3.down;
+                break;
         }
 
-        Quaternion wallRotation = Quaternion.FromToRotation(Vector3.back, Vector3.Cross(nextColumnDirection, nextRowDirection));
+        Vector3 wallHeightDirection = -Vector3.Cross(nextColumnDirection, nextRowDirection);
+        Quaternion wallRotation = Quaternion.FromToRotation(Vector3.back, wallHeightDirection);
 
         for (int row = 0; row < maze.GetLength(0); row++)
         {
@@ -203,20 +207,19 @@ public class MazeArranger : MonoBehaviour
             {
                 if ((float)rnd.NextDouble() <= pickupSpawnChance) {
                     // spawn a pickup some percentage of the time
-                    Instantiate(mazePickup, start + (column * nextColumnDirection) + (row * nextRowDirection),  wallRotation * mazePickup.transform.rotation, mazeParent.transform);
+                    Instantiate(mazePickup, start + (column * nextColumnDirection) + (row * nextRowDirection) + (mazeWallHeight * wallHeightDirection),  wallRotation * mazePickup.transform.rotation, mazeParent.transform);
                 }
-                if ((maze[row, column] & (int)Direction.Down) == 0)
+                if ((maze[row, column] & (int)Direction.Up) == 0)
                 {
                     // If there is not a path downwards,
                     // place a wall at the bottom of this cell
-                    Instantiate(mazeWallBottom, start + (column * nextColumnDirection) + (row * nextRowDirection),  wallRotation * mazeWallBottom.transform.rotation, mazeParent.transform);
+                    Instantiate(mazeWallTop, start + (column * nextColumnDirection) + (row * nextRowDirection) + (mazeWallHeight * wallHeightDirection),  wallRotation * mazeWallBottom.transform.rotation, mazeParent.transform);
                 }
-                else if ((maze[row, column] & (int)Direction.Right) == 0)
+                if ((maze[row, column] & (int)Direction.Right) == 0)
                 {
                     // If there is not a path rightwards
-                    Instantiate(mazeWallRight, start + (column * nextColumnDirection) + (row * nextRowDirection), wallRotation * mazeWallRight.transform.rotation, mazeParent.transform);
+                    Instantiate(mazeWallRight, start + (column * nextColumnDirection) + (row * nextRowDirection) + (mazeWallHeight * wallHeightDirection), wallRotation * mazeWallRight.transform.rotation, mazeParent.transform);
                 }
-                // TODO: Add pickups
             }
         }
 
@@ -266,7 +269,7 @@ public class MazeArranger : MonoBehaviour
         int localX = normalisedPosition.x - faceRect.xMin;
         int localY = normalisedPosition.y - faceRect.yMin;
 
-        return mazes[face][localX, localY];
+        return mazes[face][localY, localX];
     }
 
     void SetPositionBit(Vector2Int normalisedPosition, int value)
@@ -277,7 +280,7 @@ public class MazeArranger : MonoBehaviour
         int localX = normalisedPosition.x - faceRect.xMin;
         int localY = normalisedPosition.y - faceRect.yMin;
 
-        mazes[face][localX, localY] |= value;
+        mazes[face][localY, localX] |= value;
     }
 
     CubeFace GetFaceForPosition(Vector2Int normalisedPosition)
@@ -460,31 +463,42 @@ public class MazeArranger : MonoBehaviour
     }
 
     public static void PrintMaze(int[,] maze) {
-        StreamWriter writer = new StreamWriter("maze.txt", true, System.Text.Encoding.UTF8);
-        
-        for (int i=0; i<maze.GetLength(0); i++) {
-            for (int j=0; j<maze.GetLength(1); j++) {
-                if ((maze[i,j] & (int)Direction.Up) != 0) {
-                    writer.Write('↑');
-                } else {
-                    writer.Write(' ');
+        using(StreamWriter writer = new StreamWriter("maze.txt", false, System.Text.Encoding.UTF8)) {
+            for (int i=maze.GetLength(0)-1; i>=0; i--) {
+                for (int j=0; j<maze.GetLength(1); j++) {
+                    if ((maze[i,j] & (int)Direction.Up) != 0) {
+                        writer.Write('↑');
+                    }
+                    if ((maze[i,j] & (int)Direction.Down) != 0) {
+                        writer.Write('↓');
+                    }
+                    if ((maze[i,j] & (int)Direction.Left) != 0) {
+                        writer.Write('←');
+                    }
+                    if ((maze[i,j] & (int)Direction.Right) != 0) {
+                        writer.Write('→');
+                    }
+                    writer.Write('\t');
                 }
-                if ((maze[i,j] & (int)Direction.Down) != 0) {
-                    writer.Write('↓');
-                } else {
-                    writer.Write(' ');
-                }
-                if ((maze[i,j] & (int)Direction.Left) != 0) {
-                    writer.Write('←');
-                } else {
-                    writer.Write(' ');
-                }
-                if ((maze[i,j] & (int)Direction.Right) != 0) {
-                    writer.Write('→');
-                } else {
-                    writer.Write(' ');
-                }
+                writer.Write('\n');
             }
         }
+    }
+    public static string DirectionString(int direction) {
+        string output = "";
+        if ((direction & (int)Direction.Up) != 0) {
+            output += '↑';
+        }
+        if ((direction & (int)Direction.Down) != 0) {
+            output += '↓';
+        }
+        if ((direction & (int)Direction.Left) != 0) {
+            output += '←';
+        }
+        if ((direction & (int)Direction.Right) != 0) {
+            output += '→';
+        }
+
+        return output;
     }
 }

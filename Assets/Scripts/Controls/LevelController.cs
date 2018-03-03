@@ -7,8 +7,7 @@ public class LevelController : MonoBehaviour {
 	// This script should only be attached to one object!
 	// It exists just to keep track of how many times the level
 	// has been reloaded.
-	[SerializeField]
-	private static int levelCount;
+	private static int levelCount = 0;
 
 	void Start () {
 		SceneManager.sceneLoaded += OnSceneLoaded;
