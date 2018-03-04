@@ -31,7 +31,7 @@ public class MazeArranger : MonoBehaviour
     [SerializeField]
     private int mazeGenerationWidth;
     [SerializeField]
-    private float pickupSpawnChance;
+    private int pickupsPerFace;
     [SerializeField]
     private float mazeWallHeight;
 
@@ -190,15 +190,11 @@ public class MazeArranger : MonoBehaviour
 
         Vector3 wallHeightDirection = -Vector3.Cross(nextColumnDirection, nextRowDirection);
         Quaternion wallRotation = Quaternion.FromToRotation(Vector3.back, wallHeightDirection);
-
+        
         for (int row = 0; row < maze.GetLength(0); row++)
         {
             for (int column = 0; column < maze.GetLength(1); column++)
             {
-                if ((float)rnd.NextDouble() <= pickupSpawnChance) {
-                    // spawn a pickup some percentage of the time
-                    Instantiate(mazePickup, start + (column * nextColumnDirection) + (row * nextRowDirection) + (mazeWallHeight * wallHeightDirection),  wallRotation * mazePickup.transform.rotation, mazeParent.transform);
-                }
                 if ((maze[row, column] & (int)Direction.Up) == 0)
                 {
                     // If there is not a path downwards,
@@ -212,7 +208,11 @@ public class MazeArranger : MonoBehaviour
                 }
             }
         }
-
+        for (int pickupNum = 0; pickupNum < pickupsPerFace; pickupNum++) {
+            int row = rnd.Next(0, maze.GetLength(0) - 1);
+            int column = rnd.Next(0, maze.GetLength(1) - 1);
+            Instantiate(mazePickup, start + (column * nextColumnDirection) + (row * nextRowDirection) + (mazeWallHeight * wallHeightDirection),  wallRotation * mazePickup.transform.rotation, mazeParent.transform);
+        }
     }
 
     void GenerateTutorialMazeFrom(Vector2Int startingPoint) {

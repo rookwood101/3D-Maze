@@ -7,12 +7,14 @@ public class PickupPickuper : MonoBehaviour {
     [SerializeField]
     private GameObject audioPrefab;
     private bool destroyed = false;
+    private bool registered = false;
 
 
     void Start() {
         if (!destroyed) {
             scoreUpdater = GameObject.FindGameObjectWithTag("Score").GetComponent<ScoreUpdater>();
             scoreUpdater.RegisterPickup();
+            registered = true;
         }
     }
 
@@ -22,6 +24,9 @@ public class PickupPickuper : MonoBehaviour {
             Instantiate(audioPrefab, transform.position, transform.rotation);
             Destroy(gameObject);
         } else if (other.gameObject.CompareTag("Maze Wall")) {
+            if (registered == true) {
+                scoreUpdater.UnregisterPickup();
+            }
             destroyed = true;
             Destroy(gameObject);
         }
