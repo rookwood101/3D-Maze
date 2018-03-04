@@ -3966,25 +3966,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720aba72bc8a4298a83e1b5681eb18b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mazeWallBottom: {fileID: 1207612340663010, guid: a6e20208062ba48c1935cf7a1f2074ea,
-    type: 2}
   mazeWallTop: {fileID: 1207612340663010, guid: e4b1c3d46cd844e8ea54ec5065659df2,
     type: 2}
   mazeWallRight: {fileID: 1207612340663010, guid: 17cd7559a2d504757b8923a001724cde,
     type: 2}
-  mazeWallRightTop: {fileID: 1324783980249516, guid: d966407f77217459e860965336054765,
-    type: 2}
-  mazeWallRightBottom: {fileID: 1579412646146202, guid: 7dfa5d53076a741c7bf53601bfa6b322,
-    type: 2}
-  mazeWallBottomLeft: {fileID: 1844349175940800, guid: 6a950930480b14c6ab65b22059829ae0,
-    type: 2}
-  mazeWallBottomRight: {fileID: 1338394713188034, guid: 96b94395968b341dfa93f7e6d97389af,
-    type: 2}
-  mazePickup: {fileID: 1331134030395626, guid: 45339af6593ad4a43a0c863687162b3d, type: 2}
+  mazePickup: {fileID: 1832868517162156, guid: 6cb9d426c325940ffb99803337226929, type: 2}
   mazeParent: {fileID: 1620254616}
   mazeMax: 3.5
   mazeGenerationWidth: 8
-  pickupSpawnChance: 0.05
+  pickupsPerFace: 5
   mazeWallHeight: 0.75
 --- !u!4 &1620254618
 Transform:
