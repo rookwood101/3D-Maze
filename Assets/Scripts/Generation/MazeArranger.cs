@@ -104,6 +104,11 @@ public class MazeArranger : MonoBehaviour
             CreateTutorialBorder();
         }
         ArrangeMazeForFace(CubeFace.Top);
+        PrintMaze(mazes[CubeFace.Top], "top.txt");
+        PrintMaze(mazes[CubeFace.Front], "front.txt");
+        PrintMaze(mazes[CubeFace.Left], "left.txt");
+        PrintMaze(mazes[CubeFace.Right], "right.txt");
+        PrintMaze(mazes[CubeFace.Back], "back.txt");
     }
 
     void CreateTutorialBorder() {
@@ -436,7 +441,7 @@ public class MazeArranger : MonoBehaviour
         {
             normalisedPosition2 = normalisedPosition;
             normalisedPosition = NormalisePositionPass(normalisedPosition);
-        } while (!normalisedPosition.Key.Equals(normalisedPosition2.Key) && !normalisedPosition.Value.Equals(normalisedPosition2.Value));
+        } while (!(normalisedPosition.Key == normalisedPosition2.Key) || !(normalisedPosition.Value == normalisedPosition2.Value));
         return normalisedPosition;
     }
 
@@ -452,8 +457,8 @@ public class MazeArranger : MonoBehaviour
         }
     }
 
-    public static void PrintMaze(int[,] maze) {
-        using(StreamWriter writer = new StreamWriter("maze.txt", false, System.Text.Encoding.UTF8)) {
+    public static void PrintMaze(int[,] maze, string fileName) {
+        using(StreamWriter writer = new StreamWriter(fileName, false, System.Text.Encoding.UTF8)) {
             for (int i=maze.GetLength(0)-1; i>=0; i--) {
                 for (int j=0; j<maze.GetLength(1); j++) {
                     if ((maze[i,j] & (int)Direction.Up) != 0) {
