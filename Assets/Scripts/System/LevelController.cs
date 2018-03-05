@@ -8,7 +8,7 @@ public class LevelController : MonoBehaviour {
 	// It exists just to keep track of how many times the level
 	// has been reloaded.
 	public enum GameMode {Endless, TimeTrial};
-	private static int levelCount = 1;
+    private static int levelCount = 1;
 	private static bool addedOnSceneLoaded = false;
 	private static GameMode gameMode = GameMode.Endless;
 

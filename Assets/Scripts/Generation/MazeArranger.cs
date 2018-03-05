@@ -101,7 +101,7 @@ public class MazeArranger : MonoBehaviour
             ArrangeMazeForFace(CubeFace.Back);
         } else if (levelController.GetLevelCount() == 0) {
             GenerateTutorialMazeFrom(new Vector2Int(w/2, w + w/2));
-            CreateTutorialBorder();
+            CreateTutorialBorderAndBase();
         }
         ArrangeMazeForFace(CubeFace.Top);
         PrintMaze(mazes[CubeFace.Top], "top.txt");
@@ -111,7 +111,12 @@ public class MazeArranger : MonoBehaviour
         PrintMaze(mazes[CubeFace.Back], "back.txt");
     }
 
-    void CreateTutorialBorder() {
+    void CreateTutorialBorderAndBase() {
+        // Flattens base cube to match the single generated maze
+        Transform cube = GameObject.Find("Main Cube").GetComponent<Transform>();
+        cube.localScale = new Vector3(cube.localScale.x, cube.localScale.y * 0.01f, cube.localScale.z);
+        cube.localPosition = new Vector3(cube.localPosition.x, cube.localPosition.y + 4, cube.localPosition.z);
+
         // Creates a border around the top face
         Vector3 start = new Vector3(-mazeMax, mazeMax, -mazeMax);
         Vector3 nextColumnDirection = Vector3.right;
