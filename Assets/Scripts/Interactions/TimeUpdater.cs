@@ -12,9 +12,12 @@ public class TimeUpdater : MonoBehaviour {
     [SerializeField]
     private Text colonText;
     private float startTime;
-    private float allowedTime = 10f;
+    private float allowedTime = 20.99f;
+    private float extraTimePerPickup = 20;
+    private bool isTimeUp = false;
     private LevelController levelController;
     private ScoreUpdater scoreUpdater;
+    private Animator timeAnimator;
 
 	void Start() {
         levelController = GameObject.Find("Level Controller").GetComponent<LevelController>();
@@ -27,18 +30,25 @@ public class TimeUpdater : MonoBehaviour {
         }
         startTime = Time.timeSinceLevelLoad;
         scoreUpdater = GameObject.FindGameObjectWithTag("Score").GetComponent<ScoreUpdater>();
+        timeAnimator = GetComponent<Animator>();
     }
 
     void Update() {
-        float timeRemaining = startTime + allowedTime - Time.time;
+        float timeRemaining = startTime + allowedTime - Time.timeSinceLevelLoad;
         if (timeRemaining > 0) {
             minutesText.text = Mathf.Floor(timeRemaining / 60f).ToString("00");
             secondsText.text = Mathf.Floor(timeRemaining % 60f).ToString("00");
-        } else {
+        } else if (!isTimeUp) {
+            isTimeUp = true;
             minutesText.text = "00";
             secondsText.text = "00";
-            Destroy(gameObject);
             scoreUpdater.TimeUp();
+            Destroy(gameObject);
         }
+    }
+
+    public void IncreaseTime() {
+        allowedTime += extraTimePerPickup;
+        timeAnimator.SetTrigger("Shake");
     }
 }

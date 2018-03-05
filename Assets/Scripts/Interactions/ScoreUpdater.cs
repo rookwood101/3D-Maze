@@ -9,14 +9,23 @@ public class ScoreUpdater : MonoBehaviour {
 	private Text scoreText;
 	[SerializeField]
 	private Text pickupCountText;
+	private Animator scoreAnimator;
+	private LevelController levelController;
 
 	private int score = 0;
 	private int pickupCount = 0;
 
+	void Start() {
+		scoreAnimator = GetComponent<Animator>();
+		levelController = GameObject.Find("Level Controller").GetComponent<LevelController>();
+	}
+
 	public void IncrementScore () {
 		score++;
 		scoreText.text = score.ToString ();
-
+		if (levelController.GetGameMode() != LevelController.GameMode.TimeTrial) {
+			scoreAnimator.SetTrigger("Shake");
+		}
 		if (score == pickupCount) {
 			Debug.Log ("Level Complete!");
 

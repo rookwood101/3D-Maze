@@ -1378,6 +1378,7 @@ GameObject:
   m_Component:
   - component: {fileID: 530670726}
   - component: {fileID: 530670727}
+  - component: {fileID: 530670728}
   m_Layer: 5
   m_Name: Score
   m_TagString: Score
@@ -1419,6 +1420,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText: {fileID: 911735052}
   pickupCountText: {fileID: 1757595081}
+--- !u!95 &530670728
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 530670725}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1905c6818dd6e4a4abc96c9cd81e09c6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &588903323
 GameObject:
   m_ObjectHideFlags: 0
@@ -4804,9 +4822,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1848087410}
   - component: {fileID: 1848087411}
+  - component: {fileID: 1848087412}
   m_Layer: 5
   m_Name: Time
-  m_TagString: Untagged
+  m_TagString: Time
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4846,6 +4865,23 @@ MonoBehaviour:
   minutesText: {fileID: 1268362932}
   secondsText: {fileID: 203278857}
   colonText: {fileID: 1484929187}
+--- !u!95 &1848087412
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1848087409}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9d09e9c3581fc42289b98e946695b304, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &1871133171
 GameObject:
   m_ObjectHideFlags: 0

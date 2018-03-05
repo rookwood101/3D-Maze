@@ -9,10 +9,10 @@ public class LevelController : MonoBehaviour {
 	// has been reloaded.
 	public enum GameMode {Endless, TimeTrial};
 	private static int levelCount = 1;
-	private static bool addedOnSceneLoaded =false;
+	private static bool addedOnSceneLoaded = false;
 	private static GameMode gameMode = GameMode.Endless;
 
-	void Start () {
+	void OnEnable () {
 		if (!addedOnSceneLoaded) {
 			SceneManager.sceneLoaded += OnSceneLoaded;
 			addedOnSceneLoaded = true;
@@ -21,7 +21,6 @@ public class LevelController : MonoBehaviour {
 	
 	public void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
 		levelCount++;
-		Debug.Log(levelCount);
 	}
 
 	public int GetLevelCount() {

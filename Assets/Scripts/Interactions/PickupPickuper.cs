@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PickupPickuper : MonoBehaviour {
 	private ScoreUpdater scoreUpdater;
+    private TimeUpdater timeUpdater;
     [SerializeField]
     private GameObject audioPrefab;
     private bool destroyed = false;
@@ -14,13 +15,17 @@ public class PickupPickuper : MonoBehaviour {
         if (!destroyed) {
             scoreUpdater = GameObject.FindGameObjectWithTag("Score").GetComponent<ScoreUpdater>();
             scoreUpdater.RegisterPickup();
+            timeUpdater = GameObject.FindGameObjectWithTag("Time").GetComponent<TimeUpdater>();
             registered = true;
         }
     }
 
     void OnTriggerEnter(Collider other) {
         if (other.gameObject.CompareTag("Ball")) {
-			scoreUpdater.IncrementScore ();
+			scoreUpdater.IncrementScore();
+            if (timeUpdater != null) {
+                timeUpdater.IncreaseTime();
+            }
             Instantiate(audioPrefab, transform.position, transform.rotation);
             Destroy(gameObject);
         } else if (other.gameObject.CompareTag("Maze Wall")) {

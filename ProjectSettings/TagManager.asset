@@ -16,6 +16,7 @@ TagManager:
   - MazePickup
   - Maze Wall
   - SideArrows
+  - Time
   layers:
   - Default
   - TransparentFX
