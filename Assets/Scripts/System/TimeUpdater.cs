@@ -13,7 +13,7 @@ public class TimeUpdater : MonoBehaviour {
     private Text colonText;
     private float startTime;
     private float allowedTime = 20.99f;
-    private float extraTimePerPickup = 15;
+    private float extraTimePerPickup = 7;
     private bool isTimeUp = false;
     private LevelController levelController;
     private ScoreUpdater scoreUpdater;

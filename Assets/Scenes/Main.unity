@@ -2556,7 +2556,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 904458909}
   serializedVersion: 2
-  m_Mass: 100000
+  m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 1
@@ -4280,7 +4280,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slerpSpeed: 6
-  maxTilt: 15
+  maxTilt: 17
   rotateAudioPrefab: {fileID: 1932167932556304, guid: 7f0adcaab2233ab41b46fa801359207b,
     type: 2}
 --- !u!1 &1638356715
