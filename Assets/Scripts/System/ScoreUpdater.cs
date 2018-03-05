@@ -29,6 +29,11 @@ public class ScoreUpdater : MonoBehaviour {
 		if (score == pickupCount) {
 			Debug.Log ("Level Complete!");
 
+			if (levelController.GetGameMode() == LevelController.GameMode.Tutorial
+			  &&levelController.GetLevelCount() == 1) {
+				SceneManager.LoadScene("Menu");
+			}
+
 			int levelsCompleted = PlayerPrefs.GetInt("levelsCompleted", 0);
 			levelsCompleted++;
 			PlayerPrefs.SetInt("levelsCompleted", levelsCompleted);

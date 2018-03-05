@@ -13,7 +13,7 @@ public class TimeUpdater : MonoBehaviour {
     private Text colonText;
     private float startTime;
     private float allowedTime = 20.99f;
-    private float extraTimePerPickup = 20;
+    private float extraTimePerPickup = 15;
     private bool isTimeUp = false;
     private LevelController levelController;
     private ScoreUpdater scoreUpdater;
@@ -21,8 +21,7 @@ public class TimeUpdater : MonoBehaviour {
 
 	void Start() {
         levelController = GameObject.Find("Level Controller").GetComponent<LevelController>();
-        if (levelController.GetGameMode() != LevelController.GameMode.TimeTrial
-          ||levelController.GetLevelCount() < 1) {
+        if (levelController.GetGameMode() != LevelController.GameMode.TimeTrial) {
             Destroy(minutesText);
             Destroy(secondsText);
             Destroy(colonText);

@@ -91,24 +91,23 @@ public class MazeArranger : MonoBehaviour
         ccw90Directions[Direction.Left] = Direction.Down;
 
         levelController = GameObject.Find("Level Controller").GetComponent<LevelController>();
-
-        if (levelController.GetLevelCount() > 0) {
+        LevelController.GameMode gameMode = levelController.GetGameMode();
+        if (gameMode == LevelController.GameMode.Endless
+          ||gameMode == LevelController.GameMode.TimeTrial
+          ||(gameMode == LevelController.GameMode.Tutorial && levelController.GetLevelCount() > 0)) {
             GenerateMazeFrom(Vector2Int.zero);
             ArrangeMazeForFace(CubeFace.Right);
             ArrangeMazeForFace(CubeFace.Left);
             ArrangeMazeForFace(CubeFace.Bottom);
             ArrangeMazeForFace(CubeFace.Front);
             ArrangeMazeForFace(CubeFace.Back);
-        } else if (levelController.GetLevelCount() == 0) {
+            ArrangeMazeForFace(CubeFace.Top);
+        } else if (gameMode == LevelController.GameMode.Tutorial
+                 &&levelController.GetLevelCount() == 0) {
             GenerateTutorialMazeFrom(new Vector2Int(w/2, w + w/2));
             CreateTutorialBorderAndBase();
+            ArrangeMazeForFace(CubeFace.Top);
         }
-        ArrangeMazeForFace(CubeFace.Top);
-        PrintMaze(mazes[CubeFace.Top], "top.txt");
-        PrintMaze(mazes[CubeFace.Front], "front.txt");
-        PrintMaze(mazes[CubeFace.Left], "left.txt");
-        PrintMaze(mazes[CubeFace.Right], "right.txt");
-        PrintMaze(mazes[CubeFace.Back], "back.txt");
     }
 
     void CreateTutorialBorderAndBase() {

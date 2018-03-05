@@ -21,7 +21,8 @@ public class TutorialSideArrow : MonoBehaviour
     void Start()
     {
         levelController = GameObject.Find("Level Controller").GetComponent<LevelController>();
-        if (levelController.GetLevelCount() != 1) {
+        if (levelController.GetLevelCount() != 1
+          ||levelController.GetGameMode() != LevelController.GameMode.Tutorial) {
             Destroy(gameObject);
         }
         rend = GetComponent<Renderer>();

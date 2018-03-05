@@ -16,15 +16,20 @@ public class TutorialKeyPress : MonoBehaviour {
 	void Start() {
         levelController = GameObject.Find("Level Controller").GetComponent<LevelController>();
 
+        if (levelController.GetGameMode() != LevelController.GameMode.Tutorial) {
+            Destroy(gameObject);
+        }
         if (levelController.GetLevelCount() == 0) {
             if (!(myKey == KeyCode.W || myKey == KeyCode.A || myKey == KeyCode.S || myKey == KeyCode.D)) {
                 Destroy(gameObject);
             }
-        } else if (levelController.GetLevelCount() == 1) {
+        }
+        if (levelController.GetLevelCount() == 1) {
             if (!(myKey == KeyCode.Mouse0 || myKey == KeyCode.Q || myKey == KeyCode.E)) {
                 Destroy(gameObject);
             }
-        } else {
+        }
+        if (levelController.GetLevelCount() > 1) {
             Destroy(gameObject);
         }
         tr = GetComponent<Transform>();

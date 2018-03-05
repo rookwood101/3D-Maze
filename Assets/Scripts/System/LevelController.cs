@@ -7,7 +7,7 @@ public class LevelController : MonoBehaviour {
 	// This script should only be attached to one object!
 	// It exists just to keep track of how many times the level
 	// has been reloaded.
-	public enum GameMode {Endless, TimeTrial};
+	public enum GameMode {Endless, TimeTrial, Tutorial};
     private static int levelCount = 1;
 	private static bool addedOnSceneLoaded = false;
 	private static GameMode gameMode = GameMode.Endless;
