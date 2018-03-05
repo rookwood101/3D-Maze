@@ -36,4 +36,9 @@ public class ScoreUpdater : MonoBehaviour {
 		pickupCount--;
 		pickupCountText.text = pickupCount.ToString();
 	}
+
+	public void TimeUp() {
+		Debug.Log("Level Failed :(");
+		SceneManager.LoadScene (SceneManager.GetActiveScene ().name);
+	}
 }

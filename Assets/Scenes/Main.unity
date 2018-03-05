@@ -634,7 +634,6 @@ GameObject:
   - component: {fileID: 203278856}
   - component: {fileID: 203278858}
   - component: {fileID: 203278857}
-  - component: {fileID: 203278859}
   m_Layer: 5
   m_Name: Seconds
   m_TagString: Untagged
@@ -699,18 +698,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 203278855}
---- !u!114 &203278859
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 203278855}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4918cafa8a876459eb8fb339a042469c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timerPart: 1
 --- !u!1 &257548880
 GameObject:
   m_ObjectHideFlags: 0
@@ -3516,7 +3503,6 @@ GameObject:
   - component: {fileID: 1268362931}
   - component: {fileID: 1268362933}
   - component: {fileID: 1268362932}
-  - component: {fileID: 1268362934}
   m_Layer: 5
   m_Name: Minutes
   m_TagString: Untagged
@@ -3581,18 +3567,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1268362930}
---- !u!114 &1268362934
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1268362930}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4918cafa8a876459eb8fb339a042469c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timerPart: 0
 --- !u!1 &1282053805
 GameObject:
   m_ObjectHideFlags: 0
@@ -4005,7 +3979,6 @@ GameObject:
   - component: {fileID: 1484929186}
   - component: {fileID: 1484929188}
   - component: {fileID: 1484929187}
-  - component: {fileID: 1484929189}
   m_Layer: 5
   m_Name: Colon
   m_TagString: Untagged
@@ -4070,18 +4043,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1484929185}
---- !u!114 &1484929189
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1484929185}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4918cafa8a876459eb8fb339a042469c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timerPart: 2
 --- !u!1 &1569330919
 GameObject:
   m_ObjectHideFlags: 0
@@ -4842,6 +4803,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1848087410}
+  - component: {fileID: 1848087411}
   m_Layer: 5
   m_Name: Time
   m_TagString: Untagged
@@ -4870,6 +4832,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 400, y: 100}
   m_Pivot: {x: 0.5, y: 0}
+--- !u!114 &1848087411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1848087409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4918cafa8a876459eb8fb339a042469c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minutesText: {fileID: 1268362932}
+  secondsText: {fileID: 203278857}
+  colonText: {fileID: 1484929187}
 --- !u!1 &1871133171
 GameObject:
   m_ObjectHideFlags: 0
