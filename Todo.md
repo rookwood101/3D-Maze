@@ -1,5 +1,5 @@
 # Todo
  * level complete message
  * Make 'game notes' document
- * Time trial adjustments
- * Time trial failure breaks
+ * Fix maze generating wrong sometimes - seems to be a problem
+   with the right side
