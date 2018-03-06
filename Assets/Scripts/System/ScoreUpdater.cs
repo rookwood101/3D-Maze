@@ -34,8 +34,7 @@ public class ScoreUpdater : MonoBehaviour {
 
             LevelCompletionState = 1;
 
-			if (levelController.GetGameMode() == LevelController.GameMode.Tutorial
-			  &&levelController.GetLevelCount() == 1) {
+			if (levelController.GetGameMode() == LevelController.GameMode.Tutorial && levelController.GetLevelCount() == 1) {
 				SceneManager.LoadScene("Menu");
 			}
 
@@ -44,7 +43,7 @@ public class ScoreUpdater : MonoBehaviour {
 			PlayerPrefs.SetInt("levelsCompleted", levelsCompleted);
 			PlayerPrefs.Save();
 			
-			SceneManager.LoadScene (SceneManager.GetActiveScene ().name);
+			SceneManager.LoadScene (SceneManager.GetActiveScene().name);
 		}
 	}
 	public void RegisterPickup() {
@@ -61,6 +60,6 @@ public class ScoreUpdater : MonoBehaviour {
 
         LevelCompletionState = 1;
 
-        SceneManager.LoadScene (SceneManager.GetActiveScene ().name);
+        SceneManager.LoadScene (SceneManager.GetActiveScene().name);
 	}
 }
