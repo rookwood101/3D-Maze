@@ -42,8 +42,6 @@ public class ScoreUpdater : MonoBehaviour {
 			levelsCompleted++;
 			PlayerPrefs.SetInt("levelsCompleted", levelsCompleted);
 			PlayerPrefs.Save();
-			
-			SceneManager.LoadScene (SceneManager.GetActiveScene().name);
 		}
 	}
 	public void RegisterPickup() {
@@ -58,8 +56,6 @@ public class ScoreUpdater : MonoBehaviour {
 	public void TimeUp() {
 		Debug.Log("Level Failed :(");
 
-        LevelCompletionState = 1;
-
-        SceneManager.LoadScene (SceneManager.GetActiveScene().name);
+        LevelCompletionState = 2;
 	}
 }

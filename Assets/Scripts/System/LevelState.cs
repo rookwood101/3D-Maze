@@ -1,33 +1,41 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LevelState : MonoBehaviour {
 
     int state;
-    bool displayState;
+    bool handled;
+    Color invisible;
+    Color visible;
 
     void Start() {
-        DontDestroyOnLoad(gameObject);
-        displayState = false;
+        handled = false;
+        invisible = new Color(1, 1, 1, 0);
+        visible = new Color (1, 1, 1, 1);
     }
 
 
 	void Update () {
         state = GameObject.Find("Score").GetComponent<ScoreUpdater>().LevelCompletionState;
-        if (state > 0) {
-            //GameObject.Find("WinLoseText").GetComponent<CanvasRenderer>().text = "Level Complete";
-            gameObject.GetComponent<CanvasRenderer>().SetAlpha(1);
-            displayState = true;
-            Invoke(disableDisplayState(), 2);
-        } else if (displayState == false){
-            //GameObject.Find("WinLoseText").GetComponent<CanvasRenderer>(). = "";
-            gameObject.GetComponent<CanvasRenderer>().SetAlpha(1);
+        if (state > 0 && !handled) {
+            Debug.Log("here");
+            handled = true;
+            if (state == 1) {
+                // win
+                GameObject.Find("WinText").GetComponent<Image>().color = visible;
+            }
+            if (state == 2) {
+                // lose
+                GameObject.Find("LoseText").GetComponent<Image>().color = visible;
+            }
+            Invoke("DisableDisplayState", 2);
         }
     }
 
-    string disableDisplayState() {
-        displayState = false;
-        return "";
+    void DisableDisplayState() {
+        SceneManager.LoadScene (SceneManager.GetActiveScene().name);
     }
 }
