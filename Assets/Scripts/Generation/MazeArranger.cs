@@ -22,7 +22,6 @@ public class MazeArranger : MonoBehaviour
     // The parent object that holds the entire maze cube.
     [SerializeField]
     private GameObject mazeParent;
-
     // The absolute value of the biggest/smallest x/y/z position any wall block can be in.
     // Equal to the big centre cube's width/2 + 0.5.
     // Currently the cube is width 8, allowing 10x10 walls. 
@@ -199,7 +198,6 @@ public class MazeArranger : MonoBehaviour
 
         Vector3 wallHeightDirection = -Vector3.Cross(nextColumnDirection, nextRowDirection);
         Quaternion wallRotation = Quaternion.FromToRotation(Vector3.back, wallHeightDirection);
-        
         for (int row = 0; row < maze.GetLength(0); row++)
         {
             for (int column = 0; column < maze.GetLength(1); column++)
@@ -306,8 +304,8 @@ public class MazeArranger : MonoBehaviour
         Direction d = direction;
         int distanceFromEdge;
         int distanceAlongEdge;
-        // 1
-        if (x >= 2 * w && y >= 0 && y < w)
+        // 1 - right face right edge TO back face right edge
+        if (x >= 2 * w && y >= 0 && y < w && d == Direction.Right)
         {
             distanceFromEdge = x - 2 * w + 1;
             distanceAlongEdge = y;
@@ -317,7 +315,7 @@ public class MazeArranger : MonoBehaviour
 
         }
         // 1r
-        else if (x >= w && y >= 2 * w && y < 3 * w)
+        else if (x >= w && y >= 2 * w && y < 3 * w && d == Direction.Right)
         {
             distanceFromEdge = x - w + 1;
             distanceAlongEdge = y - 2 * w;
@@ -325,8 +323,8 @@ public class MazeArranger : MonoBehaviour
             y = w - 1 - distanceAlongEdge;
             d = oppositeDirections[d];
         }
-        // 2
-        else if (y >= w && x >= w && x < 2 * w)
+        // 2 right face top edge TO top face right edge
+        else if (y >= w && x >= w && x < 2 * w && d == Direction.Up)
         {
             distanceFromEdge = y - w + 1;
             distanceAlongEdge = x - w;
@@ -335,7 +333,7 @@ public class MazeArranger : MonoBehaviour
             d = ccw90Directions[d];
         }
         // 2r
-        else if (x >= w && y >= w && y < 2 * w)
+        else if (x >= w && y >= w && y < 2 * w && d == Direction.Right)
         {
             distanceFromEdge = x - w + 1;
             distanceAlongEdge = y - w;
@@ -343,8 +341,8 @@ public class MazeArranger : MonoBehaviour
             y = w - distanceFromEdge;
             d = cw90Directions[d];
         }
-        // 3
-        else if (y < 0 && x >= w && x < 2 * w)
+        // 3 right face bottom edge TO bottom face right edge
+        else if (y < 0 && x >= w && x < 2 * w && d == Direction.Down)
         {
             distanceFromEdge = -y;
             distanceAlongEdge = x - w;
@@ -353,7 +351,7 @@ public class MazeArranger : MonoBehaviour
             d = cw90Directions[d];
         }
         // 3r
-        else if (x >= w && y >= -w && y < 0)
+        else if (x >= w && y >= -w && y < 0 && d == Direction.Right)
         {
             distanceFromEdge = x - w + 1;
             distanceAlongEdge = y + w;
@@ -361,8 +359,8 @@ public class MazeArranger : MonoBehaviour
             y = -1 + distanceFromEdge;
             d = ccw90Directions[d];
         }
-        // 4
-        else if (y >= w && x >= -w && x < 0)
+        // 4 left face top edge TO top face left edge
+        else if (y >= w && x >= -w && x < 0 && d == Direction.Up)
         {
             distanceFromEdge = y - w + 1;
             distanceAlongEdge = x + w;
@@ -371,7 +369,7 @@ public class MazeArranger : MonoBehaviour
             d = cw90Directions[d];
         }
         // 4r
-        else if (x < 0 && y >= w && y < 2 * w)
+        else if (x < 0 && y >= w && y < 2 * w && d == Direction.Left)
         {
             distanceFromEdge = -x;
             distanceAlongEdge = y - w;
@@ -379,8 +377,8 @@ public class MazeArranger : MonoBehaviour
             y = w - distanceFromEdge;
             d = ccw90Directions[d];
         }
-        // 5
-        else if (x < -w && y >= 0 && y < w)
+        // 5 left face left edge to back face left edge
+        else if (x < -w && y >= 0 && y < w && d == Direction.Left)
         {
             distanceFromEdge = -x + w;
             distanceAlongEdge = y;
@@ -389,7 +387,7 @@ public class MazeArranger : MonoBehaviour
             d = oppositeDirections[d];
         }
         // 5r
-        else if (x < 0 && y >= 2 * w && y < 3 * w)
+        else if (x < 0 && y >= 2 * w && y < 3 * w && d == Direction.Left)
         {
             distanceFromEdge = -x;
             distanceAlongEdge = y - 2 * w;
@@ -397,8 +395,8 @@ public class MazeArranger : MonoBehaviour
             y = w - 1 - distanceAlongEdge;
             d = oppositeDirections[d];
         }
-        // 6
-        else if (y < 0 && x >= -w && x < 0)
+        // 6 left face bottom edge TO bottom face left edge
+        else if (y < 0 && x >= -w && x < 0 && d == Direction.Down)
         {
             distanceFromEdge = -y;
             distanceAlongEdge = x + w;
@@ -407,7 +405,7 @@ public class MazeArranger : MonoBehaviour
             d = ccw90Directions[d];
         }
         // 6r
-        else if (x < 0 && y >= -w && y < 0)
+        else if (x < 0 && y >= -w && y < 0 && d == Direction.Left)
         {
             distanceFromEdge = -x;
             distanceAlongEdge = y + w;
@@ -415,8 +413,8 @@ public class MazeArranger : MonoBehaviour
             y = -1 + distanceFromEdge;
             d = cw90Directions[d];
         }
-        // 7
-        else if (y < -w && x >= 0 && x < w)
+        // 7 bottom face bottom edge TO back face top edge
+        else if (y < -w && x >= 0 && x < w && d == Direction.Down)
         {
             distanceFromEdge = -y + w;
             distanceAlongEdge = x;
@@ -425,7 +423,7 @@ public class MazeArranger : MonoBehaviour
             //same direction
         }
         // 7r
-        else if (y >= 3 * w && x >= 0 && x < w)
+        else if (y >= 3 * w && x >= 0 && x < w && d == Direction.Up)
         {
             distanceFromEdge = y - 3 * w + 1;
             distanceAlongEdge = x;
@@ -449,7 +447,7 @@ public class MazeArranger : MonoBehaviour
         return normalisedPosition;
     }
 
-    public static void Shuffle<T>(System.Random rng, T[] array)
+    static void Shuffle<T>(System.Random rng, T[] array)
     {
         int n = array.Length;
         while (n > 1)
@@ -461,29 +459,23 @@ public class MazeArranger : MonoBehaviour
         }
     }
 
-    public static void PrintMaze(int[,] maze, string fileName) {
+    static void PrintMaze(int[,] maze, string fileName) {
         using(StreamWriter writer = new StreamWriter(fileName, false, System.Text.Encoding.UTF8)) {
             for (int i=maze.GetLength(0)-1; i>=0; i--) {
                 for (int j=0; j<maze.GetLength(1); j++) {
-                    if ((maze[i,j] & (int)Direction.Up) != 0) {
-                        writer.Write('↑');
-                    }
-                    if ((maze[i,j] & (int)Direction.Down) != 0) {
-                        writer.Write('↓');
-                    }
-                    if ((maze[i,j] & (int)Direction.Left) != 0) {
-                        writer.Write('←');
-                    }
-                    if ((maze[i,j] & (int)Direction.Right) != 0) {
-                        writer.Write('→');
-                    }
+                    writer.Write(DirectionString(maze[i, j]));
                     writer.Write('\t');
                 }
                 writer.Write('\n');
             }
         }
     }
-    public static string DirectionString(int direction) {
+    static void PrintDirections(Vector2Int location, Direction direction, Vector2Int newLocation) {
+        using(StreamWriter writer = new StreamWriter("directions.txt", true, System.Text.Encoding.UTF8)) {
+            writer.WriteLine("At " + location + ", going " + DirectionString((int)direction) + " to " + newLocation);
+        }
+    }
+    static string DirectionString(int direction) {
         string output = "";
         if ((direction & (int)Direction.Up) != 0) {
             output += '↑';
