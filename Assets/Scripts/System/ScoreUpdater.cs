@@ -11,11 +11,14 @@ public class ScoreUpdater : MonoBehaviour {
 	private Text pickupCountText;
 	private Animator scoreAnimator;
 	private LevelController levelController;
+    [SerializeField]
+    public int LevelCompletionState; //0 for unfinished, 1 for win, 2 for lose
 
 	private int score = 0;
 	private int pickupCount = 0;
 
 	void Start() {
+        LevelCompletionState = 0;
 		scoreAnimator = GetComponent<Animator>();
 		levelController = GameObject.Find("Level Controller").GetComponent<LevelController>();
 	}
@@ -28,6 +31,8 @@ public class ScoreUpdater : MonoBehaviour {
 		}
 		if (score == pickupCount) {
 			Debug.Log ("Level Complete!");
+
+            LevelCompletionState = 1;
 
 			if (levelController.GetGameMode() == LevelController.GameMode.Tutorial
 			  &&levelController.GetLevelCount() == 1) {
@@ -53,6 +58,9 @@ public class ScoreUpdater : MonoBehaviour {
 
 	public void TimeUp() {
 		Debug.Log("Level Failed :(");
-		SceneManager.LoadScene (SceneManager.GetActiveScene ().name);
+
+        LevelCompletionState = 1;
+
+        SceneManager.LoadScene (SceneManager.GetActiveScene ().name);
 	}
 }

@@ -11,6 +11,8 @@ public class LevelController : MonoBehaviour {
     private static int levelCount = 1;
 	private static bool addedOnSceneLoaded = false;
 	private static GameMode gameMode = GameMode.Endless;
+    [SerializeField]
+    public GameObject FadeOut;
 
 	void OnEnable () {
 		if (!addedOnSceneLoaded) {
@@ -29,10 +31,23 @@ public class LevelController : MonoBehaviour {
 	public void SetLevelCount(int newLevelCount) {
 		levelCount = newLevelCount;
 	}
+
 	public GameMode GetGameMode() {
 		return gameMode;
 	}
+
 	public void SetGameMode(GameMode newGameMode) {
 		gameMode = newGameMode;
-	}
+        
+        Invoke("LoadLevel", 0.5f);
+        FadeOut.GetComponent<FadeOut>().Fade();
+    }
+
+    public void LoadLevel()
+    {
+        SetLevelCount(-1);
+        SetGameMode(gameMode);
+        SceneManager.LoadScene("Main");
+    }
+
 }

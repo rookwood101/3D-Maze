@@ -2,17 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class StartButton : MonoBehaviour {
+
 	[SerializeField]
 	private LevelController.GameMode gameMode;
 	private LevelController levelController;
-	void Start() {
+    [SerializeField]
+    public Image transitionImage;
+    [SerializeField]
+    public Animator anim;
+
+    void Start() {
 		levelController = GameObject.Find("Level Controller").GetComponent<LevelController>();
 	}
 	public void OnButtonClick() {
-		levelController.SetLevelCount(-1);
-		levelController.SetGameMode(gameMode);
-		SceneManager.LoadScene("Main");
+        levelController.SetGameMode(gameMode);
 	}
+
+
 }

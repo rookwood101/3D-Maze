@@ -16,7 +16,7 @@ public class MazeArranger : MonoBehaviour
     private GameObject mazeWallTop;
     [SerializeField]
     private GameObject mazeWallRight;
-    // Maze pickup prefab (currently a small sphere)
+    // Maze pickup prefab
     [SerializeField]
     private GameObject mazePickup;
     // The parent object that holds the entire maze cube.
